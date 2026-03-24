@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NielsenIQ | Global FMCG Intelligence · Updated Mar 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --blue:   #2D6DF6;
+  --deep:   #060A45;
+  --lblue:  #31D1FF;
+  --orange: #EF5F17;
+  --green:  #59AD00;
+  --pink:   #EF5890;
+  --yellow: #FFB500;
+  --gray:   #999;
+  --bg:     #F0F2F8;
+  --card:   #fff;
+  --border: #E0E4F0;
+  --text:   #0A0E2A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* ── HEADER ── */
+.hdr{background:var(--deep);position:sticky;top:0;z-index:999;box-shadow:0 4px 30px rgba(6,10,69,.4)}
+.hdr-stripe{height:3px;background:linear-gradient(90deg,var(--blue),var(--lblue))}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:58px}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer}
+.logo-box{width:32px;height:32px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff;letter-spacing:-.5px;border-radius:3px}
+.logo-name{font-size:16px;font-weight:900;color:#fff}
+.logo-tag{font-size:8px;color:rgba(255,255,255,.35);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:-2px}
+.nav{display:flex;gap:2px}
+.ntab{padding:6px 15px;color:rgba(255,255,255,.45);font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;border-radius:3px;border:1px solid transparent;transition:all .15s;white-space:nowrap}
+.ntab:hover{color:#fff;background:rgba(255,255,255,.07)}
+.ntab.on{color:#fff;background:var(--blue);border-color:var(--blue)}
+.hdr-meta{font-size:9px;color:rgba(255,255,255,.22);letter-spacing:1.5px;text-transform:uppercase}
+
+/* ── PAGES ── */
+.pg{display:none}.pg.on{display:block}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,var(--deep) 0%,#0a1260 45%,#0c1888 100%);padding:52px 48px 48px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232D6DF6' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.hero-eyebrow{font-size:9px;color:var(--blue);letter-spacing:3px;text-transform:uppercase;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:10px;position:relative;z-index:1}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--blue)}
+.hero-title{font-size:48px;font-weight:900;color:#fff;line-height:1.02;letter-spacing:-2px;margin-bottom:14px;position:relative;z-index:1}
+.hero-title em{color:var(--blue);font-style:normal}
+.hero-sub{font-size:13px;color:rgba(255,255,255,.45);max-width:560px;line-height:1.7;margin-bottom:44px;position:relative;z-index:1}
+.hero-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;max-width:700px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);position:relative;z-index:1}
+.hkpi{background:rgba(255,255,255,.02);padding:20px 24px;transition:background .2s}
+.hkpi:hover{background:rgba(255,255,255,.06)}
+.hkpi-n{font-size:32px;font-weight:900;color:#fff;line-height:1;display:block}
+.hkpi-l{font-size:8px;color:rgba(255,255,255,.35);letter-spacing:2px;text-transform:uppercase;margin-top:5px;display:block}
+.hero-deco{position:absolute;right:-40px;top:-40px;width:500px;height:500px;background:radial-gradient(circle,rgba(45,109,246,.12) 0%,transparent 65%);pointer-events:none;z-index:0}
+
+/* ── CONTAINERS & SECTIONS ── */
+.wrap{max-width:1440px;margin:0 auto;padding:44px 48px}
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.sec-title{font-size:15px;font-weight:900;color:var(--deep);white-space:nowrap;letter-spacing:-.2px}
+.sec-line{flex:1;height:1px;background:var(--border)}
+.sec-tag{font-size:8px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;font-weight:700;white-space:nowrap}
+
+/* ── SIGNAL STRIP ── */
+.signal-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px}
+.sig-card{background:var(--card);border:1px solid var(--border);padding:0;overflow:hidden;transition:transform .2s,box-shadow .2s;cursor:default}
+.sig-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(45,109,246,.12)}
+.sig-top{padding:20px 20px 14px;position:relative}
+.sig-accent{position:absolute;top:0;left:0;right:0;height:3px}
+.sig-icon{font-size:26px;margin-bottom:10px;display:block}
+.sig-val{font-size:30px;font-weight:900;color:var(--deep);line-height:1;display:block}
+.sig-unit{font-size:13px;font-weight:400;color:var(--gray)}
+.sig-label{font-size:9px;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-top:4px;display:block}
+.sig-bottom{padding:10px 20px 14px;border-top:1px solid var(--border);background:#FAFBFD}
+.sig-insight{font-size:10px;color:var(--deep);line-height:1.55;font-weight:500}
+.sig-insight strong{color:var(--blue)}
+
+/* ── CHART CARDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:24px}
+.g13{display:grid;grid-template-columns:1fr 2fr;gap:20px;margin-bottom:24px}
+.g31{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:24px}
+.gfull{margin-bottom:24px}
+.cc{background:var(--card);border:1px solid var(--border);padding:26px;position:relative;overflow:hidden}
+.cc-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:12px}
+.cc-left{}
+.cc-title{font-size:13px;font-weight:900;color:var(--deep);letter-spacing:-.2px;line-height:1.3}
+.cc-sub{font-size:10px;color:var(--gray);margin-top:3px;line-height:1.4}
+.cc-badge{font-size:8px;letter-spacing:1px;text-transform:uppercase;font-weight:800;padding:3px 9px;border-radius:2px;white-space:nowrap;flex-shrink:0}
+.bb{background:rgba(45,109,246,.1);color:var(--blue)}
+.bd{background:rgba(6,10,69,.08);color:var(--deep)}
+.bg{background:rgba(89,173,0,.1);color:var(--green)}
+.bo{background:rgba(239,95,23,.1);color:var(--orange)}
+.by{background:rgba(255,181,0,.15);color:#8A6000}
+.bl{background:rgba(49,209,255,.15);color:#006A8A}
+
+/* ── INSIGHT BOX ── */
+.insight-box{margin-top:16px;padding:12px 14px;border-left:3px solid var(--blue);background:#F4F7FF;display:flex;gap:10px;align-items:flex-start}
+.ib-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.ib-text{font-size:11px;color:var(--text);line-height:1.6}
+.ib-text strong{color:var(--blue);font-weight:800}
+
+/* ── TAKEAWAY PILLS ── */
+.takeaways{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tw{display:flex;align-items:center;gap:6px;padding:5px 10px;background:#F0F3FF;border:1px solid #D6E0FF;font-size:10px;color:var(--deep);font-weight:700;border-radius:2px}
+.tw-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* ── LEAGUE TABLE ── */
+.league{display:flex;flex-direction:column;gap:0}
+.league-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F2F4FA;transition:background .1s}
+.league-row:hover{background:#F8F9FF}
+.league-rank{font-size:11px;font-weight:900;color:var(--gray);width:20px;text-align:right;flex-shrink:0}
+.league-flag{font-size:16px;flex-shrink:0}
+.league-name{font-size:11px;font-weight:700;color:var(--deep);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.league-bar-wrap{flex:2;height:14px;background:#F0F2F8;border-radius:1px;overflow:hidden;position:relative}
+.league-bar{height:100%;border-radius:1px;transition:width .8s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;padding-left:6px}
+.league-bar span{font-size:8px;font-weight:800;color:#fff;white-space:nowrap}
+.league-val{font-size:11px;font-weight:800;color:var(--deep);width:40px;text-align:right;flex-shrink:0}
+.league-tag{font-size:8px;padding:2px 6px;border-radius:2px;font-weight:700;flex-shrink:0;white-space:nowrap}
+
+/* ── SCORECARD GRID ── */
+.scorecard-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.sc{background:var(--card);border:1px solid var(--border);padding:18px;position:relative;overflow:hidden;transition:transform .18s,box-shadow .18s}
+.sc:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(45,109,246,.1)}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.sc-n{font-size:26px;font-weight:900;color:var(--deep);line-height:1;display:block}
+.sc-l{font-size:8px;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-top:4px;display:block}
+.sc-s{font-size:10px;color:var(--gray);margin-top:6px}
+.sc-delta{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:800;padding:2px 6px;border-radius:2px;margin-top:6px}
+
+/* ── QUADRANT MAP ── */
+.quadrant{position:relative;width:100%;aspect-ratio:1.4}
+.quad-canvas{position:absolute;inset:0}
+.quad-labels{position:absolute;inset:0;pointer-events:none}
+.quad-label{position:absolute;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 8px;border-radius:2px}
+
+/* ── WORLD STRIP ── */
+.world-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--border);overflow:hidden;margin-bottom:24px}
+.ws-region{padding:20px;position:relative;border-right:1px solid var(--border)}
+.ws-region:last-child{border-right:none}
+.ws-region-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ws-region-label{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px}
+.ws-region-count{font-size:9px;color:var(--gray)}
+.ws-stats{display:flex;flex-direction:column;gap:7px}
+.ws-stat{display:flex;align-items:center;justify-content:space-between}
+.ws-stat-l{font-size:10px;color:var(--gray)}
+.ws-stat-v{font-size:10px;font-weight:800;color:var(--deep)}
+.ws-bar-row{margin-top:10px}
+.ws-bar-label{font-size:9px;color:var(--gray);margin-bottom:3px;display:flex;justify-content:space-between}
+.ws-bar-track{height:4px;background:#E8EBFA;border-radius:1px;overflow:hidden}
+.ws-bar-fill{height:100%;border-radius:1px;transition:width 1s}
+
+/* ── INFOGRAPHIC PANELS ── */
+.info-panel{background:var(--deep);padding:28px;position:relative;overflow:hidden}
+.info-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--lblue))}
+.ip-title{font-size:14px;font-weight:900;color:#fff;margin-bottom:6px;letter-spacing:-.2px}
+.ip-sub{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:20px;line-height:1.5}
+.ip-items{display:flex;flex-direction:column;gap:10px}
+.ip-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,255,255,.04);border-left:2px solid rgba(255,255,255,.1);transition:all .18s}
+.ip-item:hover{background:rgba(255,255,255,.07);border-left-color:var(--blue)}
+.ip-item-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.ip-item-text{font-size:10px;color:rgba(255,255,255,.7);line-height:1.6}
+.ip-item-text strong{color:#fff;font-weight:800}
+
+/* ── HEATMAP ── */
+.heatmap-wrap{overflow-x:auto}
+.heatmap{border-collapse:collapse;width:100%;font-size:10px}
+.heatmap th{background:var(--deep);color:rgba(255,255,255,.6);font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:8px 10px;text-align:center;white-space:nowrap;font-weight:700}
+.heatmap th:first-child{text-align:left;width:160px}
+.heatmap td{padding:7px 10px;text-align:center;font-weight:700;font-size:10px;white-space:nowrap;border:1px solid rgba(255,255,255,.05)}
+.heatmap td:first-child{text-align:left;font-size:11px;background:#FAFBFD;font-weight:700;border:none;border-bottom:1px solid #F0F2F8}
+.heatmap tr:hover td{filter:brightness(.95)}
+
+/* ── SLIDE DECK ── */
+.deck-wrap{background:var(--deep)}
+.deck-hero{padding:48px;background:linear-gradient(135deg,var(--deep),#0a1260);position:relative;overflow:hidden;text-align:center}
+.deck-hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(45,109,246,.1),transparent 70%);pointer-events:none}
+.deck-hn{font-size:36px;font-weight:900;color:#fff;letter-spacing:-1.5px;position:relative}
+.deck-hn em{color:var(--blue);font-style:normal}
+.deck-hs{font-size:12px;color:rgba(255,255,255,.4);margin-top:8px;position:relative}
+.deck-nav{display:flex;align-items:center;justify-content:center;gap:8px;padding:16px;background:rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.07);flex-wrap:wrap}
+.sdot{width:28px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;cursor:pointer;transition:all .2s}
+.sdot.on{background:var(--blue);width:40px}
+.sdot:hover{background:rgba(255,255,255,.4)}
+.snb{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#fff;font-size:10px;font-weight:800;padding:6px 16px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all .18s;font-family:Arial;border-radius:2px}
+.snb:hover{background:var(--blue);border-color:var(--blue)}
+.scount{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1px;margin:0 6px}
+.slide{display:none;padding:36px 48px}.slide.on{display:block}
+
+/* Slide layouts */
+.s-2col{display:grid;grid-template-columns:1fr 1fr;gap:22px;min-height:440px}
+.s-left{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:36px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.s-left::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue)}
+.s-right{background:var(--card);border:1px solid var(--border);padding:32px;display:flex;flex-direction:column;justify-content:center}
+.s-full{background:var(--card);border:1px solid var(--border);padding:36px;min-height:440px;position:relative;overflow:hidden}
+.s-full::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--lblue))}
+.s-cover{background:linear-gradient(135deg,var(--deep),#0a1260);border:1px solid rgba(255,255,255,.07);padding:56px;text-align:center;min-height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.s-cover::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue)}
+.s-bignumber{position:absolute;right:30px;bottom:10px;font-size:100px;font-weight:900;color:rgba(255,255,255,.03);line-height:1}
+
+/* Slide typography */
+.sey{font-size:8px;letter-spacing:3px;text-transform:uppercase;font-weight:800;color:var(--blue);margin-bottom:12px}
+.st{font-size:22px;font-weight:900;color:var(--deep);line-height:1.15;letter-spacing:-.5px;margin-bottom:8px}
+.stw{font-size:22px;font-weight:900;color:#fff;line-height:1.15;letter-spacing:-.5px;margin-bottom:8px}
+.ss{font-size:11px;color:var(--gray);line-height:1.65;margin-bottom:16px}
+.ssw{font-size:11px;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:16px}
+
+.s-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.s-stat{text-align:center;padding:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.s-stat-n{font-size:22px;font-weight:900;color:#fff;line-height:1;display:block}
+.s-stat-l{font-size:8px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase;margin-top:4px;display:block}
+
+.s-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.s-li{display:flex;gap:10px;padding:10px 12px;background:#F5F8FF;border-left:3px solid #D8E4FF;transition:all .15s}
+.s-li:hover{border-left-color:var(--blue);background:#EEF3FF}
+.s-li-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.s-li-t{font-size:11px;color:var(--text);line-height:1.55;font-weight:500}
+.s-li-t strong{color:var(--deep);font-weight:800}
+
+.s-bars{display:flex;flex-direction:column;gap:7px;margin-top:14px}
+.s-bar-row{display:flex;align-items:center;gap:8px}
+.s-bar-l{font-size:10px;font-weight:700;color:rgba(255,255,255,.65);width:90px;text-align:right;flex-shrink:0}
+.s-bar-track{flex:1;height:16px;background:rgba(255,255,255,.07);border-radius:1px;overflow:hidden}
+.s-bar-fill{height:100%;display:flex;align-items:center;padding-left:6px;font-size:8px;font-weight:800;color:#fff;border-radius:1px;transition:width 1s ease}
+.s-bar-fill.dark-text{color:#111}
+
+.s-matrix{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.s-mat-cell{padding:14px;border:1px solid var(--border);transition:box-shadow .18s}
+.s-mat-cell:hover{box-shadow:0 4px 20px rgba(45,109,246,.1)}
+.s-mat-title{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.s-mat-text{font-size:10px;color:var(--gray);line-height:1.5}
+.s-mat-chips{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+.chip{font-size:8px;padding:2px 5px;border-radius:2px;font-weight:800;letter-spacing:.3px}
+
+.progress-stack{display:flex;flex-direction:column;gap:11px}
+.prog-item{}
+.prog-label{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:var(--text);margin-bottom:4px}
+.prog-label span:last-child{color:var(--gray);font-weight:400;font-size:9px}
+.prog-track{height:8px;background:#EAECF5;border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* ── TABLE ── */
+.tbl-wrap{background:var(--card);border:1px solid var(--border);overflow:hidden;margin-bottom:24px}
+.tbl-bar{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:#FAFBFD;flex-wrap:wrap;gap:10px}
+.tbl-search-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ti{font-family:Arial;font-size:11px;border:1px solid var(--border);padding:6px 10px;outline:none;color:var(--text);background:#fff;border-radius:2px;transition:border .15s}
+.ti:focus{border-color:var(--blue)}
+.tc{font-size:10px;color:var(--gray);font-weight:800}
+.dt{width:100%;border-collapse:collapse;font-size:11px}
+.dt thead th{background:var(--deep);color:rgba(255,255,255,.65);font-size:8px;letter-spacing:1px;text-transform:uppercase;font-weight:700;padding:9px 12px;text-align:left;white-space:nowrap;cursor:pointer;user-select:none;transition:background .12s}
+.dt thead th:hover{background:#0e1560}
+.dt thead th.srt{color:var(--lblue)}
+.dt tbody tr{border-bottom:1px solid #F0F2F8;transition:background .1s}
+.dt tbody tr:hover{background:#F4F7FF}
+.dt tbody td{padding:8px 12px;vertical-align:middle}
+.rtag{font-size:8px;letter-spacing:1px;text-transform:uppercase;font-weight:800;padding:2px 6px;border-radius:2px;white-space:nowrap}
+.r-US{background:#EEF3FF;color:#2D6DF6}
+.r-WE{background:#F0F9E8;color:#3A7A00}
+.r-EEMEA{background:#FFF3EE;color:#B04000}
+.r-APAC{background:#E4F8FF;color:#006A8A}
+.r-LATAM{background:#FDF0F6;color:#A02060}
+.stag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:2px;white-space:nowrap}
+.bc{display:flex;align-items:center;gap:5px}
+.mb{height:4px;border-radius:1px;opacity:.7;min-width:2px;transition:opacity .2s}
+.dt tbody tr:hover .mb{opacity:1}
+.bv{font-weight:800;color:var(--deep);min-width:36px}
+
+/* ── FOOTER ── */
+.ftr{background:var(--deep);padding:20px 48px;display:flex;align-items:center;justify-content:space-between;margin-top:40px;border-top:3px solid var(--blue)}
+.ftr-l{font-size:9px;color:rgba(255,255,255,.28);line-height:1.7}
+.ftr-r{font-size:8px;color:rgba(255,255,255,.15);letter-spacing:2px;text-transform:uppercase}
+
+/* ── ABOUT PAGE ── */
+.about-lead{background:linear-gradient(135deg,var(--deep) 0%,#0a1260 100%);padding:52px 48px;position:relative;overflow:hidden}
+.about-lead::before{content:'';position:absolute;top:50%;right:-80px;transform:translateY(-50%);width:420px;height:420px;background:radial-gradient(circle,rgba(45,109,246,.13),transparent 70%);pointer-events:none}
+.about-2col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
+.about-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:24px}
+.acard{background:var(--card);border:1px solid var(--border);padding:28px;position:relative;overflow:hidden}
+.acard-accent{position:absolute;top:0;left:0;right:0;height:3px}
+.acard h3{font-size:13px;font-weight:900;color:var(--deep);margin-bottom:10px;letter-spacing:-.2px}
+.acard p{font-size:12px;color:#444;line-height:1.75}
+.acard p+p{margin-top:10px}
+.acard strong{color:var(--deep);font-weight:800}
+
+/* How to read — metric tiles */
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+.metric-tile{background:var(--card);border:1px solid var(--border);padding:20px;display:flex;gap:14px;align-items:flex-start;transition:box-shadow .18s}
+.metric-tile:hover{box-shadow:0 6px 24px rgba(45,109,246,.09)}
+.mt-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.mt-body{}
+.mt-abbr{font-size:11px;font-weight:900;color:var(--blue);letter-spacing:.5px;margin-bottom:3px}
+.mt-full{font-size:10px;font-weight:700;color:var(--deep);margin-bottom:4px}
+.mt-desc{font-size:10px;color:var(--gray);line-height:1.6}
+.mt-source{font-size:9px;color:var(--blue);margin-top:5px;font-weight:700;letter-spacing:.5px}
+.mt-conf{display:inline-flex;align-items:center;gap:4px;font-size:8px;font-weight:800;padding:2px 7px;border-radius:2px;margin-top:5px;letter-spacing:.5px}
+.conf-high{background:#EAF5E0;color:#2E6600}
+.conf-med{background:#FFF3D0;color:#7A4800}
+.conf-est{background:#FDECEA;color:#B71C1C}
+
+/* Color legend */
+.color-legend{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.cl-item{background:var(--card);border:1px solid var(--border);padding:16px 14px;display:flex;flex-direction:column;gap:6px}
+.cl-swatch{width:32px;height:6px;border-radius:2px}
+.cl-name{font-size:10px;font-weight:800;color:var(--deep)}
+.cl-hex{font-size:9px;color:var(--gray);letter-spacing:1px}
+.cl-use{font-size:9px;color:#555;line-height:1.5;margin-top:2px}
+
+/* Region legend */
+.region-legend{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.rl-item{background:var(--card);border:1px solid var(--border);padding:16px;display:flex;flex-direction:column;gap:6px}
+.rl-dot{width:14px;height:14px;border-radius:50%}
+.rl-label{font-size:11px;font-weight:800;color:var(--deep)}
+.rl-code{font-size:9px;font-weight:700;padding:2px 6px;border-radius:2px;width:fit-content}
+.rl-mkts{font-size:9px;color:var(--gray)}
+
+/* Source cards */
+.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+.src-card{background:var(--card);border:1px solid var(--border);padding:20px;position:relative;overflow:hidden;transition:transform .18s,box-shadow .18s}
+.src-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(45,109,246,.1)}
+.src-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px}
+.src-name{font-size:12px;font-weight:900;color:var(--deep);margin-bottom:6px;padding-right:50px}
+.src-badge{position:absolute;top:14px;right:14px;font-size:8px;font-weight:800;padding:3px 7px;border-radius:2px;letter-spacing:.5px}
+.src-url{font-size:10px;color:var(--blue);margin-bottom:10px;word-break:break-all;font-weight:600}
+.src-covers{font-size:10px;color:#555;line-height:1.65}
+.src-covers strong{color:var(--deep);font-weight:800}
+.src-note{margin-top:8px;font-size:9px;color:var(--gray);line-height:1.5;font-style:italic}
+
+/* Disclaimer box */
+.disclaimer{background:#FFF8EC;border:1px solid #FFD980;border-left:4px solid var(--yellow);padding:20px 22px;margin-bottom:24px}
+.disclaimer h4{font-size:12px;font-weight:900;color:#7A4800;margin-bottom:8px}
+.disclaimer p{font-size:11px;color:#5A3800;line-height:1.7}
+
+/* Confidence table */
+.conf-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:24px}
+.conf-table thead th{background:var(--deep);color:rgba(255,255,255,.7);font-size:8px;letter-spacing:1px;text-transform:uppercase;font-weight:700;padding:9px 14px;text-align:left}
+.conf-table tbody tr{border-bottom:1px solid #F0F2F8;transition:background .1s}
+.conf-table tbody tr:hover{background:#F4F7FF}
+.conf-table tbody td{padding:9px 14px;vertical-align:middle}
+.conf-pill{font-size:9px;font-weight:800;padding:2px 8px;border-radius:2px;letter-spacing:.5px}
+
+/* Tips */
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+.tip-item{background:var(--card);border:1px solid var(--border);padding:18px;display:flex;gap:12px;align-items:flex-start}
+.tip-num{width:26px;height:26px;background:var(--blue);color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;margin-top:1px}
+.tip-text{font-size:11px;color:#444;line-height:1.65}
+.tip-text strong{color:var(--deep);font-weight:800}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1200px){.g3{grid-template-columns:1fr 1fr}.signal-strip{grid-template-columns:repeat(3,1fr)}.scorecard-grid{grid-template-columns:repeat(3,1fr)}.world-strip{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.g2,.g13,.g31{grid-template-columns:1fr}.signal-strip{grid-template-columns:repeat(2,1fr)}.scorecard-grid{grid-template-columns:repeat(2,1fr)}.world-strip{grid-template-columns:1fr 1fr}.s-2col{grid-template-columns:1fr}}
+@media(max-width:600px){.hero{padding:32px 20px}.hero-title{font-size:30px}.wrap{padding:24px 20px}.signal-strip{grid-template-columns:1fr}.hdr-meta{display:none}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-stripe"></div>
+  <div class="hdr-inner">
+    <div class="logo">
+      <div class="logo-box">NiQ</div>
+      <div>
+        <span class="logo-name">NielsenIQ</span>
+        <span class="logo-tag">Intelligence Platform</span>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="ntab on" onclick="goPage('dash',this)">Overview</div>
+      <div class="ntab" onclick="goPage('signals',this)">Market Signals</div>
+      <div class="ntab" onclick="goPage('explorer',this)">Data Explorer</div>
+      <div class="ntab" onclick="goPage('deck',this)">Strategy Deck</div>
+      <div class="ntab" onclick="goPage('about',this)" style="border-left:1px solid rgba(255,255,255,.12);margin-left:6px;padding-left:18px">About & Sources</div>
+    </nav>
+    <div class="hdr-meta">42 Markets · FMCG 2025</div>
+  </div>
+</header>
+
+<!-- =====================================================================
+     PAGE 1 — OVERVIEW
+===================================================================== -->
+<div id="pg-dash" class="pg on">
+  <div class="hero">
+    <div class="hero-deco"></div>
+    <div class="hero-eyebrow">NielsenIQ Global Intelligence Report · 2025</div>
+    <div class="hero-title">Global <em>FMCG</em><br>Macro Intelligence</div>
+    <div class="hero-sub">42 markets. 5 regions. 7.8 billion consumers. The macro signals shaping where FMCG grows, stalls, and gets disrupted.</div>
+    <div class="hero-kpis">
+      <div class="hkpi"><span class="hkpi-n">42</span><span class="hkpi-l">Markets Tracked</span></div>
+      <div class="hkpi"><span class="hkpi-n">$5.10</span><span class="hkpi-l">Avg Big Mac Price</span></div>
+      <div class="hkpi"><span class="hkpi-n">7.3%</span><span class="hkpi-l">Fastest GDP Growth</span></div>
+      <div class="hkpi"><span class="hkpi-n">42%</span><span class="hkpi-l">Peak E-Comm Share</span></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- SIGNAL STRIP -->
+    <div class="sec-head">
+      <div class="sec-title">Five Forces Reshaping FMCG Now</div>
+      <div class="sec-line"></div>
+      <div class="sec-tag">2025 Priority Signals</div>
+    </div>
+    <div class="signal-strip">
+
+      <div class="sig-card">
+        <div class="sig-top">
+          <div class="sig-accent" style="background:var(--blue)"></div>
+          <span class="sig-icon">📦</span>
+          <span class="sig-val">3.7<span class="sig-unit">×</span></span>
+          <span class="sig-label">Global Price Spread</span>
+        </div>
+        <div class="sig-bottom">
+          <div class="sig-insight">Big Mac ranges from <strong>$2.47 Taiwan</strong> to <strong>$9.08 Switzerland</strong>. The spread has widened — currency moves in 2025 pushed WE prices sharply above US. Pack-size engineering is not optional — it's the growth lever.</div>
+        </div>
+      </div>
+
+      <div class="sig-card">
+        <div class="sig-top">
+          <div class="sig-accent" style="background:var(--orange)"></div>
+          <span class="sig-icon">🔥</span>
+          <span class="sig-val">24.7<span class="sig-unit">%</span></span>
+          <span class="sig-label">Peak Inflation · Turkey</span>
+        </div>
+        <div class="sig-bottom">
+          <div class="sig-insight"><strong>Argentina's inflation fell to 16.4%</strong> (down from 60% in 2024 — Milei reforms working). Turkey now leads at 24.7%. Nigeria down to 17%. Basket fragmentation and downtrading remain structural in all three.</div>
+        </div>
+      </div>
+
+      <div class="sig-card">
+        <div class="sig-top">
+          <div class="sig-accent" style="background:var(--lblue)"></div>
+          <span class="sig-icon">📱</span>
+          <span class="sig-val">42<span class="sig-unit">%</span></span>
+          <span class="sig-label">FMCG E-Comm · China</span>
+        </div>
+        <div class="sig-bottom">
+          <div class="sig-insight"><strong>China holds at 42%, S.Korea at 36%.</strong> India's quick-commerce (Blinkit, Zepto) bypassing traditional e-comm entirely. SEA at inflection — Vietnam, Malaysia, Indonesia all accelerating.</div>
+        </div>
+      </div>
+
+      <div class="sig-card">
+        <div class="sig-top">
+          <div class="sig-accent" style="background:var(--green)"></div>
+          <span class="sig-icon">🚀</span>
+          <span class="sig-val">7.3<span class="sig-unit">%</span></span>
+          <span class="sig-label">GDP Growth · India 2025</span>
+        </div>
+        <div class="sig-bottom">
+          <div class="sig-insight"><strong>India surprised to the upside — 7.3% in 2025</strong> (IMF upgraded +0.7pp). Vietnam at 6.5%. China delivered 5.0%. These three are the FMCG volume engines for the next decade.</div>
+        </div>
+      </div>
+
+      <div class="sig-card">
+        <div class="sig-top">
+          <div class="sig-accent" style="background:var(--pink)"></div>
+          <span class="sig-icon">👥</span>
+          <span class="sig-val">31<span class="sig-unit">yr</span></span>
+          <span class="sig-label">Median Age Gap</span>
+        </div>
+        <div class="sig-bottom">
+          <div class="sig-insight">Nigeria (18 yrs) vs Japan (49 yrs) — <strong>31-year gap</strong> in the same dataset. Two completely different FMCG playbooks sharing the same SKU catalogue. That's the disconnect brands haven't fully solved.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- WORLD REGION STRIP -->
+    <div class="sec-head">
+      <div class="sec-title">Regional Snapshot</div>
+      <div class="sec-line"></div>
+      <div class="sec-tag">Avg. Regional Metrics · 2025</div>
+    </div>
+    <div class="world-strip">
+      <div class="ws-region" style="background:linear-gradient(180deg,#F4F7FF 0%,#fff 100%)">
+        <div class="ws-region-top">
+          <div class="ws-region-label" style="color:var(--blue)">🌎 Americas</div>
+          <div class="ws-region-count">10 markets</div>
+        </div>
+        <div class="ws-stats">
+          <div class="ws-stat"><span class="ws-stat-l">Avg Big Mac</span><span class="ws-stat-v">$5.38</span></div>
+          <div class="ws-stat"><span class="ws-stat-l">Avg Inflation</span><span class="ws-stat-v">6.4%</span></div>
+          <div class="ws-stat"><span class="ws-stat-l">Avg E-Comm</span><span class="ws-stat-v">14.4%</span></div>
+        </div>
+        <div class="ws-bar-row">
+          <div class="ws-bar-label"><span>E-Commerce</span><span>14.4%</span></div>
+          <div class="ws-bar-track"><div class="ws-bar-fill" style="width:32%;background:var(--blue)"></div></div>
+        </div>
+      </div>
+      <div class="ws-region" style="background:linear-gradient(180deg,#F0F9E8 0%,#fff 100%)">
+        <div class="ws-region-top">
+          <div class="ws-region-label" style="color:var(--green)">🇪🇺 Western Europe</div>
+          <div class="ws-region-count">8 markets</div>
+        </div>
+        <div class="ws-stats">
+          <div class="ws-stat"><span class="ws-stat-l">Avg Big Mac</span><span class="ws-stat-v">$5.55</span></div>
+          <div class="ws-stat"><span class="ws-stat-l">Avg Inflation</span><span class="ws-stat-v">2.0%</span></div>
+          <div class="ws-stat"><span class="ws-stat-l">Avg E-Comm</span><span class="ws-stat-v">25.9%</span></div>
+        </div>
+        <div class="ws-bar-row">
+          <div class="ws-bar-label"><span>E-Commerce</span><span>25.9%</span></div>
+          <div class="ws-bar-track"><div class="ws-bar-fill" style="width:58%;background:var(--green)"></div></div>
+        </div>
+      </div>
+      <div class="ws-region" style="background:linear-gradient(180deg,#FFF6F2 0%,#fff 100%)">
+        <div class="ws-region-top">
+          <div class="ws-region-label" style="color:var(--orange)">🌍 EEMEA</div>
+          <div class="ws-region-count">11 markets</div>
+        </div>
+        <div class="ws-stats">
+          <div class="ws-stat"><span class="ws-stat-l">Avg Big Mac</span><span class="ws-stat-v">$3.87</span></div>
+          <div class="ws-stat"><span class="ws-stat-l">Avg Inflation</span><span class="ws-stat-v">9.2%</span></div>
+          <div class="ws-stat"><span class="ws-stat-l">Avg E-Comm</span><span class="ws-stat-v">13.1%</span></div>
+        </div>
+        <div class="ws-bar-row">
+          <div class="ws-bar-label"><span>E-Commerce</span><span>13.1%</span></div>
+          <div class="ws-bar-track"><div class="ws-bar-fill" style="width:29%;background:var(--orange)"></div></div>
+        </div>
+      </div>
+      <div class="ws-region" style="background:linear-gradient(180deg,#E4F8FF 0%,#fff 100%)">
+        <div class="ws-region-top">
+          <div class="ws-region-label" style="color:#006A8A">🌏 Asia-Pacific</div>
+          <div class="ws-region-count">13 markets</div>
+        </div>
+        <div class="ws-stats">
+          <div class="ws-stat"><span class="ws-stat-l">Avg Big Mac</span><span class="ws-stat-v">$3.46</span></div>
+          <div class="ws-stat"><span class="ws-stat-l">Avg Inflation</span><span class="ws-stat-v">2.4%</span></div>
+          <div class="ws-stat"><span class="ws-stat-l">Avg E-Comm</span><span class="ws-stat-v">25.2%</span></div>
+        </div>
+        <div class="ws-bar-row">
+          <div class="ws-bar-label"><span>E-Commerce</span><span>25.2%</span></div>
+          <div class="ws-bar-track"><div class="ws-bar-fill" style="width:56%;background:var(--lblue)"></div></div>
+        </div>
+      </div>
+      <div class="ws-region" style="background:linear-gradient(180deg,#FDF0F6 0%,#fff 100%)">
+        <div class="ws-region-top">
+          <div class="ws-region-label" style="color:#A02060">🌎 Latin America</div>
+          <div class="ws-region-count">8 markets</div>
+        </div>
+        <div class="ws-stats">
+          <div class="ws-stat"><span class="ws-stat-l">Avg Big Mac</span><span class="ws-stat-v">$5.11</span></div>
+          <div class="ws-stat"><span class="ws-stat-l">Avg Inflation</span><span class="ws-stat-v">10.1%</span></div>
+          <div class="ws-stat"><span class="ws-stat-l">Avg E-Comm</span><span class="ws-stat-v">13.1%</span></div>
+        </div>
+        <div class="ws-bar-row">
+          <div class="ws-bar-label"><span>E-Commerce</span><span>13.1%</span></div>
+          <div class="ws-bar-track"><div class="ws-bar-fill" style="width:29%;background:var(--pink)"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARTS ROW 1 -->
+    <div class="g2">
+      <div class="cc">
+        <div class="cc-head">
+          <div class="cc-left">
+            <div class="cc-title">Big Mac Index — Global Price Map</div>
+            <div class="cc-sub">US baseline $6.12 · sorted high→low · Orange = inflation outlier · Source: The Economist Jan 2026</div>
+          </div>
+          <div class="cc-badge bb">Pricing Power</div>
+        </div>
+        <div style="position:relative;height:300px"><canvas id="bigmacChart"></canvas></div>
+        <div class="insight-box">
+          <div class="ib-icon">💡</div>
+          <div class="ib-text"><strong>Takeaway:</strong> Switzerland ($9.08) now commands 3.7× Taiwan's price ($2.47) for the same product — the spread widened sharply in 2025 as WE currencies strengthened vs USD. Any FMCG brand using global price floors is leaving volume on the table in 60% of these markets.</div>
+        </div>
+      </div>
+
+      <div class="cc">
+        <div class="cc-head">
+          <div class="cc-left">
+            <div class="cc-title">E-Commerce FMCG Penetration</div>
+            <div class="cc-sub">% share of total grocery retail — Top 18 markets</div>
+          </div>
+          <div class="cc-badge bl">Digital Retail</div>
+        </div>
+        <div style="position:relative;height:300px"><canvas id="ecommChart"></canvas></div>
+        <div class="insight-box">
+          <div class="ib-icon">⚡</div>
+          <div class="ib-text"><strong>Takeaway:</strong> China's 42% FMCG e-comm share took 15 years to build. India is doing it in 5 via quick-commerce. <strong>Route-to-market strategies written in 2020 are already obsolete.</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARTS ROW 2 -->
+    <div class="g2">
+      <div class="cc">
+        <div class="cc-head">
+          <div class="cc-left">
+            <div class="cc-title">GDP per Capita PPP vs Inflation — Strategic Quadrants</div>
+            <div class="cc-sub">Bubble = population · Color = region · Hover for detail · IMF WEO Oct 2025</div>
+          </div>
+          <div class="cc-badge bd">Strategic Map</div>
+        </div>
+        <div style="position:relative;height:320px"><canvas id="bubbleChart"></canvas></div>
+        <div class="takeaways">
+          <div class="tw"><div class="tw-dot" style="background:var(--green)"></div>Top-Right = Premium play</div>
+          <div class="tw"><div class="tw-dot" style="background:var(--orange)"></div>High inflation = downtrading</div>
+          <div class="tw"><div class="tw-dot" style="background:var(--blue)"></div>Bottom-left = Volume markets</div>
+        </div>
+      </div>
+
+      <div class="cc">
+        <div class="cc-head">
+          <div class="cc-left">
+            <div class="cc-title">Inflation Regime Map — 20 Key Markets</div>
+            <div class="cc-sub">Annual CPI % — 3 distinct playbooks required · IMF WEO Oct 2025</div>
+          </div>
+          <div class="cc-badge bo">Inflation Risk</div>
+        </div>
+        <div style="position:relative;height:320px"><canvas id="inflationChart"></canvas></div>
+        <div class="insight-box">
+          <div class="ib-icon">🎯</div>
+          <div class="ib-text"><strong>Takeaway:</strong> Argentina, Turkey, Nigeria sit in hyperinflation (&gt;20%). Germany, Japan, Thailand in stability (&lt;3%). <strong>One global promotional strategy cannot serve both realities simultaneously.</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARTS ROW 3 -->
+    <div class="g31">
+      <div class="cc">
+        <div class="cc-head">
+          <div class="cc-left">
+            <div class="cc-title">Big Mac vs Coca-Cola 2L — FMCG Pricing Architecture</div>
+            <div class="cc-sub">The ratio between these two reveals pack-price strategy headroom per market</div>
+          </div>
+          <div class="cc-badge bb">Price Architecture</div>
+        </div>
+        <div style="position:relative;height:280px"><canvas id="cokeChart"></canvas></div>
+        <div class="takeaways">
+          <div class="tw"><div class="tw-dot" style="background:var(--deep)"></div>Mexico: $1.19 Coke — highest vol/price efficiency globally</div>
+          <div class="tw"><div class="tw-dot" style="background:var(--orange)"></div>Switzerland: $3.49 Coke — 3× India's $1.09</div>
+          <div class="tw"><div class="tw-dot" style="background:var(--green)"></div>Low-price markets = sachet, multipacks, price lock</div>
+        </div>
+      </div>
+
+      <div class="cc">
+        <div class="cc-head">
+          <div class="cc-left">
+            <div class="cc-title">Urbanization vs E-Commerce</div>
+            <div class="cc-sub">The correlation that predicts modern trade readiness</div>
+          </div>
+          <div class="cc-badge bg">Urban Signal</div>
+        </div>
+        <div style="position:relative;height:280px"><canvas id="urbanMiniChart"></canvas></div>
+        <div class="insight-box">
+          <div class="ib-icon">🏙️</div>
+          <div class="ib-text"><strong>+1pp urban ≈ +2–3%</strong> organized retail. Vietnam breaks the rule — 39% urban but 19% e-comm. Quick-commerce and mini-marts are the new urbanization shortcut.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEATMAP -->
+    <div class="sec-head">
+      <div class="sec-title">FMCG Market Attractiveness Heatmap</div>
+      <div class="sec-line"></div>
+      <div class="sec-tag">Top 20 Markets · Key Dimensions</div>
+    </div>
+    <div class="cc" style="padding:0">
+      <div class="cc-head" style="padding:20px 26px 0">
+        <div class="cc-left">
+          <div class="cc-title">Multi-Dimensional Market Ranking</div>
+          <div class="cc-sub">Color intensity = relative score within each column · Hover rows for detail</div>
+        </div>
+        <div class="cc-badge bb">Composite View</div>
+      </div>
+      <div class="heatmap-wrap" style="padding:16px 0 0">
+        <table class="heatmap" id="heatmapTable"></table>
+      </div>
+    </div>
+    <div class="insight-box" style="margin-top:0;margin-bottom:24px">
+      <div class="ib-icon">🔑</div>
+      <div class="ib-text"><strong>Reading this table:</strong> Deeper blue = stronger signal within that column. India scores highest on Growth + E-Comm Potential. China leads E-Comm but deflation suppresses margins. Singapore is the GDP outlier that sets premium pricing anchors for SEA. Germany's 0.3% growth with 29% e-comm = mature market where digital is the only volume lever.</div>
+    </div>
+
+  </div><!-- /wrap -->
+</div><!-- /pg-dash -->
+
+<!-- =====================================================================
+     PAGE 2 — MARKET SIGNALS
+===================================================================== -->
+<div id="pg-signals" class="pg">
+  <div class="hero" style="padding:40px 48px">
+    <div class="hero-eyebrow">Deep Dive · Structural Signals</div>
+    <div class="hero-title" style="font-size:34px">Market <em>Signals</em></div>
+    <div class="hero-sub">The demographic, consumption, and growth patterns that determine FMCG strategy for the next 5 years.</div>
+  </div>
+  <div class="wrap">
+
+    <div class="sec-head"><div class="sec-title">Demographic Dividend — Who's Young, Who's Aging</div><div class="sec-line"></div><div class="sec-tag">Median Age · Demand Profile</div></div>
+    <div class="g2">
+      <div class="cc">
+        <div class="cc-head"><div class="cc-left"><div class="cc-title">Median Age Spectrum — Top 20 Markets</div><div class="cc-sub">Orange = young (&lt;30) · Blue = mature (30–42) · Deep = aging (&gt;42)</div></div><div class="cc-badge bo">Demographics</div></div>
+        <div style="position:relative;height:320px"><canvas id="ageChart"></canvas></div>
+        <div class="insight-box"><div class="ib-icon">👶</div><div class="ib-text"><strong>Nigeria (18) to Japan (49)</strong> — a 31-year median age span in one dataset. Young markets need volume, access, and sachet formats. Aging markets need health, convenience, and smaller pack sizes. Same multinational portfolio serves both — but not the same way.</div></div>
+      </div>
+      <div class="cc">
+        <div class="cc-head"><div class="cc-left"><div class="cc-title">Real GDP Growth vs E-Commerce Penetration</div><div class="cc-sub">Quadrant analysis — Size = population</div></div><div class="cc-badge bg">Growth Map</div></div>
+        <div style="position:relative;height:320px"><canvas id="growthEcommChart"></canvas></div>
+        <div class="takeaways">
+          <div class="tw"><div class="tw-dot" style="background:var(--green)"></div>Top-right: High growth + digital = priority</div>
+          <div class="tw"><div class="tw-dot" style="background:var(--blue)"></div>Top-left: Digital leader, mature economy</div>
+          <div class="tw"><div class="tw-dot" style="background:var(--orange)"></div>Bottom-right: Growth without digital = physical expansion</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-head"><div class="sec-title">Private Consumption — FMCG's Economic Engine</div><div class="sec-line"></div><div class="sec-tag">% of GDP · Consumer Spending Weight</div></div>
+    <div class="g2">
+      <div class="cc">
+        <div class="cc-head"><div class="cc-left"><div class="cc-title">Private Consumption as % of GDP — Top 15</div><div class="cc-sub">Higher = more consumer-driven economy = bigger FMCG multiplier</div></div><div class="cc-badge bo">Consumption Weight</div></div>
+        <div style="position:relative;height:300px"><canvas id="consumptionChart"></canvas></div>
+        <div class="insight-box"><div class="ib-icon">💰</div><div class="ib-text"><strong>Guatemala (82%) and Egypt (82%)</strong> have the highest private consumption share — meaning GDP growth translates almost directly into FMCG volume. <strong>Every $1 of economic growth is nearly $0.82 of consumer spending.</strong></div></div>
+      </div>
+      <div class="cc">
+        <div class="cc-head"><div class="cc-left"><div class="cc-title">GDP per Capita PPP Ranking — All 42 Markets</div><div class="cc-sub">Wealth distribution across the full dataset</div></div><div class="cc-badge bd">Wealth Tier</div></div>
+        <div style="position:relative;height:300px"><canvas id="gdpPPPChart"></canvas></div>
+        <div class="insight-box"><div class="ib-icon">📊</div><div class="ib-text">Singapore ($141K) is <strong>23× Nigeria's GDP PPP ($6K)</strong> — in the same APAC region. Premium portfolio management in APAC requires treating it as 13 separate markets, not one region.</div></div>
+      </div>
+    </div>
+
+    <div class="sec-head"><div class="sec-title">Urbanization → Modern Trade Readiness</div><div class="sec-line"></div><div class="sec-tag">Urban % · Retail Modernization</div></div>
+    <div class="gfull">
+      <div class="cc">
+        <div class="cc-head"><div class="cc-left"><div class="cc-title">Urbanization Rate vs E-Commerce — Full 42 Market Scatter</div><div class="cc-sub">Bubble = GDP PPP · Color = Region · The outliers are the opportunity</div></div><div class="cc-badge bl">Scatter Analysis</div></div>
+        <div style="position:relative;height:380px"><canvas id="urbanFullChart"></canvas></div>
+        <div class="takeaways" style="margin-top:14px">
+          <div class="tw"><div class="tw-dot" style="background:var(--lblue)"></div>Vietnam — breaks the curve (39% urban, 19% e-comm)</div>
+          <div class="tw"><div class="tw-dot" style="background:var(--green)"></div>India — 36% urban, 14% e-comm, 6.5% GDP growth = biggest upside</div>
+          <div class="tw"><div class="tw-dot" style="background:var(--orange)"></div>Nigeria — 55% urban but only 8% e-comm = infrastructure gap, not demand gap</div>
+          <div class="tw"><div class="tw-dot" style="background:var(--deep)"></div>China — 67% urban, 42% e-comm = broke all urbanization rules</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =====================================================================
+     PAGE 3 — DATA EXPLORER
+===================================================================== -->
+<div id="pg-explorer" class="pg">
+  <div class="hero" style="padding:40px 48px">
+    <div class="hero-eyebrow">Full Dataset · All 42 Markets</div>
+    <div class="hero-title" style="font-size:34px">Data <em>Explorer</em></div>
+    <div class="hero-sub">Sort and filter every market across all 16 FMCG indicators. Click column headers to sort.</div>
+  </div>
+  <div class="wrap">
+    <div class="tbl-wrap">
+      <div class="tbl-bar">
+        <div class="tbl-search-row">
+          <input class="ti" type="text" id="searchInput" placeholder="🔍 Search market or signal…" oninput="buildTable()" style="width:200px">
+          <select class="ti" id="regionFilter" onchange="buildTable()">
+            <option value="">All Regions</option>
+            <option value="US">Americas</option>
+            <option value="WE">Western Europe</option>
+            <option value="EEMEA">EEMEA</option>
+            <option value="APAC">Asia-Pacific</option>
+            <option value="LATAM">Latin America</option>
+          </select>
+          <select class="ti" id="signalFilter" onchange="buildTable()">
+            <option value="">All Signals</option>
+            <option value="High Growth">High Growth</option>
+            <option value="Mature">Mature</option>
+            <option value="Premium">Premium</option>
+            <option value="Inflation">Inflation</option>
+            <option value="Frontier">Frontier</option>
+          </select>
+        </div>
+        <div class="tc" id="tblCount">42 markets</div>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="dt" id="mainTable">
+          <thead><tr>
+            <th onclick="sortTbl(0)">Reg.</th>
+            <th onclick="sortTbl(1)">Market</th>
+            <th onclick="sortTbl(2)">Pop M</th>
+            <th onclick="sortTbl(3)">GDP PPP $</th>
+            <th onclick="sortTbl(4)">Big Mac</th>
+            <th onclick="sortTbl(5)">BM Index</th>
+            <th onclick="sortTbl(6)">Coke 2L</th>
+            <th onclick="sortTbl(7)">CPI %</th>
+            <th onclick="sortTbl(8)">Pvt Cons.</th>
+            <th onclick="sortTbl(9)">Urban %</th>
+            <th onclick="sortTbl(10)">GDP Gr.</th>
+            <th onclick="sortTbl(11)">Unemp.</th>
+            <th onclick="sortTbl(12)">Median Age</th>
+            <th onclick="sortTbl(13)">E-Comm %</th>
+            <th onclick="sortTbl(14)">Signal</th>
+            <th>Insight</th>
+          </tr></thead>
+          <tbody id="tblBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     PAGE 4 — STRATEGY DECK
+===================================================================== -->
+<div id="pg-deck" class="pg">
+  <div class="deck-wrap">
+    <div class="deck-hero">
+      <div style="font-size:9px;letter-spacing:3px;color:var(--blue);text-transform:uppercase;font-weight:800;margin-bottom:14px;position:relative">NielsenIQ Strategic Intelligence · 2025</div>
+      <div class="deck-hn">8 Insights That Change<br>How You See <em>FMCG</em></div>
+      <div class="deck-hs">42 markets · 5 regions · actionable · use ← → arrows to navigate</div>
+    </div>
+    <div class="deck-nav">
+      <button class="snb" onclick="gSlide(-1)">← Prev</button>
+      <div id="sdots"></div>
+      <span class="scount" id="scount">1 / 8</span>
+      <button class="snb" onclick="gSlide(1)">Next →</button>
+    </div>
+
+    <!-- SLIDE 1 -->
+    <div class="slide on" id="sl-1">
+      <div class="s-cover">
+        <div style="font-size:9px;letter-spacing:3px;color:var(--blue);text-transform:uppercase;font-weight:800;margin-bottom:20px">Global Consumer Intelligence · 2025</div>
+        <div style="font-size:52px;font-weight:900;color:#fff;line-height:.98;letter-spacing:-2.5px;margin-bottom:18px">8 Insights That<br>Reframe <span style="color:var(--blue)">FMCG</span></div>
+        <div style="font-size:13px;color:rgba(255,255,255,.4);max-width:500px;line-height:1.7;margin-bottom:36px">A macro intelligence briefing across 42 markets. Not trends reports — structural realities that demand strategy adjustments now.</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);max-width:600px;border:1px solid rgba(255,255,255,.08)">
+          <div style="background:rgba(255,255,255,.03);padding:16px 18px;text-align:center"><span style="font-size:24px;font-weight:900;color:#fff;display:block">42</span><span style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-top:4px;display:block">Markets</span></div>
+          <div style="background:rgba(255,255,255,.03);padding:16px 18px;text-align:center"><span style="font-size:24px;font-weight:900;color:#fff;display:block">5</span><span style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-top:4px;display:block">Regions</span></div>
+          <div style="background:rgba(255,255,255,.03);padding:16px 18px;text-align:center"><span style="font-size:24px;font-weight:900;color:#fff;display:block">7.8B</span><span style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-top:4px;display:block">Consumers</span></div>
+          <div style="background:rgba(255,255,255,.03);padding:16px 18px;text-align:center"><span style="font-size:24px;font-weight:900;color:#fff;display:block">11</span><span style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-top:4px;display:block">KPIs</span></div>
+        </div>
+        <div style="position:absolute;bottom:22px;left:40px;font-size:9px;color:rgba(255,255,255,.18);letter-spacing:2px;text-transform:uppercase">IMF WEO Oct 2025 · The Economist Jan 2026 · World Bank · UN 2025</div>
+        <div class="s-bignumber">01</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide" id="sl-2">
+      <div class="s-2col">
+        <div class="s-left">
+          <div class="sey">01 · Pricing Power</div>
+          <div class="stw">The 3.7× Price Gap: Why Global SKUs Are a Fantasy</div>
+          <div class="ssw">Switzerland pays $9.08 for what Taiwan prices at $2.47 — the gap widened sharply in 2025 as the Swiss franc and European currencies surged vs. the dollar. The US baseline itself rose from $5.79 to $6.12. Any FMCG brand running a "global price floor" is leaving volume on the table in 25+ markets.</div>
+          <div class="s-stats">
+            <div class="s-stat"><span class="s-stat-n">$9.08</span><span class="s-stat-l">🇨🇭 Switzerland</span></div>
+            <div class="s-stat"><span class="s-stat-n">$6.12</span><span class="s-stat-l">🇺🇸 US Baseline</span></div>
+            <div class="s-stat"><span class="s-stat-n">$2.47</span><span class="s-stat-l">🇹🇼 Taiwan</span></div>
+          </div>
+          <div class="s-bignumber">02</div>
+        </div>
+        <div class="s-right">
+          <div class="sey" style="color:var(--deep)">What FMCG Brands Must Do</div>
+          <div class="st">Sachets are access. Multi-packs are loyalty. Price floors are the enemy of volume.</div>
+          <ul class="s-list">
+            <li class="s-li"><span class="s-li-icon">📦</span><span class="s-li-t"><strong>India & Indonesia ($2.51–$2.52 Big Mac):</strong> Sub-$3 Big Mac signals any SKU above $1 needs a value story or smaller pack. Sachets in personal care drive 60%+ of category volume. This isn't a compromise — it's the category.</span></li>
+            <li class="s-li"><span class="s-li-icon">🇲🇽</span><span class="s-li-t"><strong>Mexico now above US ($6.17 vs $6.12):</strong> Highest per-capita Coke consumption globally. BM crossing US parity is a signal — the Mexican consumer is richer than the price signals suggest. Premium SKUs have untapped headroom here.</span></li>
+            <li class="s-li"><span class="s-li-icon">🇹🇼</span><span class="s-li-t"><strong>Taiwan paradox ($85K GDP PPP, $2.47 Big Mac):</strong> World's cheapest Big Mac among high-income economies. Premium product lines have enormous untapped headroom. The consumer can afford it — the market just hasn't been offered it right.</span></li>
+            <li class="s-li"><span class="s-li-icon">🟢</span><span class="s-li-t"><strong>Argentina ($5.53 — down from $7.40):</strong> The biggest pricing story of 2025. Inflation fell from 60% to 16.4% under Milei reforms. Private label still dominant, but the path back to branded premium is opening. Watch this market.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide" id="sl-3">
+      <div class="s-full">
+        <div class="sey" style="color:var(--blue)">02 · Inflation Playbook</div>
+        <div class="st">Three Inflation Regimes. Three Completely Different FMCG Strategies.</div>
+        <div class="ss">The biggest mistake: one strategy across different inflation regimes. The map changed in 2025 — Argentina dramatically cut inflation, China is exiting deflation, and Turkey now leads the hyperinflation table. Update your playbook accordingly.</div>
+        <div style="height:1px;background:var(--border);margin:16px 0"></div>
+        <div class="s-matrix">
+          <div class="s-mat-cell" style="border-top:3px solid var(--orange)">
+            <div class="s-mat-title" style="color:var(--orange)">🔴 Hyperinflation (&gt;20%) — Survival Mode</div>
+            <div class="s-mat-text">Consumers shop every 2–3 days instead of weekly. Basket size shrinks. Price per unit matters more than pack size. Local brands outperform multinationals by 15–25pts. Private label is the only growth vector. Note: Argentina has exited this zone (now 16.4%).</div>
+            <div class="s-mat-chips"><span class="chip" style="background:#FDE8DA;color:#B04000">🇹🇷 Turkey 24.7%</span><span class="chip" style="background:#FDE8DA;color:#B04000">🇳🇬 Nigeria 17%</span></div>
+          </div>
+          <div class="s-mat-cell" style="border-top:3px solid var(--green)">
+            <div class="s-mat-title" style="color:var(--green)">🟢 Stable (&lt;3%) — Premiumization Window</div>
+            <div class="s-mat-text">Volume recovery is real. Brand equity investments pay off. Premiumization unlocked in health, wellness, and convenience. Price-pack moves are about growth architecture, not crisis management.</div>
+            <div class="s-mat-chips"><span class="chip" style="background:#E8F5D6;color:#2E6600">🇩🇪 Germany 2.1%</span><span class="chip" style="background:#E8F5D6;color:#2E6600">🇯🇵 Japan 2.7%</span><span class="chip" style="background:#E8F5D6;color:#2E6600">🇫🇷 France 0.9%</span><span class="chip" style="background:#E8F5D6;color:#2E6600">🇻🇳 Vietnam 3.2%</span><span class="chip" style="background:#E8F5D6;color:#2E6600">🇨🇷 Costa Rica 1.0%</span></div>
+          </div>
+          <div class="s-mat-cell" style="border-top:3px solid var(--yellow)">
+            <div class="s-mat-title" style="color:#8A6000">🟡 Moderate (3–15%) — Value Architecture War</div>
+            <div class="s-mat-text">The most contested space. Private label vs. national brand battles intensify. Promotional ROI under scrutiny from retailers. Value tiers gain share. Argentina (16.4%) is entering this zone for the first time since 2021.</div>
+            <div class="s-mat-chips"><span class="chip" style="background:#FFF5CC;color:#7A5000">🇬🇧 UK 2.8%</span><span class="chip" style="background:#FFF5CC;color:#7A5000">🇪🇬 Egypt 13.5%</span><span class="chip" style="background:#FFF5CC;color:#7A5000">🇵🇰 Pakistan 7%</span><span class="chip" style="background:#FFF5CC;color:#7A5000">🇦🇷 Argentina 16.4%</span></div>
+          </div>
+          <div class="s-mat-cell" style="border-top:3px solid var(--blue)">
+            <div class="s-mat-title" style="color:var(--blue)">🔵 Deflation (≤0%) — Value Perception Crisis</div>
+            <div class="s-mat-text">China is exiting deflation — CPI now +0.2%, the first positive reading in 12 months. Stimulus and policy bank lending are working. The deflationary FMCG environment is not over, but the floor may be in. Monitor closely.</div>
+            <div class="s-mat-chips"><span class="chip" style="background:#EEF3FF;color:#2D6DF6">🇨🇳 China 0.2%</span><span class="chip" style="background:#E4F8FF;color:#006A8A">🇹🇭 Thailand 0.8%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide" id="sl-4">
+      <div class="s-2col">
+        <div class="s-left">
+          <div class="sey">03 · Digital Commerce</div>
+          <div class="stw">The E-Commerce Gap Is Not Closing — It's Splitting Into Two Speeds</div>
+          <div class="ssw">China built 42% FMCG e-comm over 15 years. India is building a different model — quick-commerce — in 5. The implication: late movers in SEA can't copy China's playbook. They have to leapfrog it.</div>
+          <div class="s-bars">
+            <div class="s-bar-row"><div class="s-bar-l">🇨🇳 China</div><div class="s-bar-track"><div class="s-bar-fill" style="width:84%;background:var(--lblue)">42%</div></div></div>
+            <div class="s-bar-row"><div class="s-bar-l">🇰🇷 S. Korea</div><div class="s-bar-track"><div class="s-bar-fill" style="width:72%;background:var(--lblue)">36%</div></div></div>
+            <div class="s-bar-row"><div class="s-bar-l">🇬🇧 UK</div><div class="s-bar-track"><div class="s-bar-fill" style="width:66%;background:var(--blue)">33%</div></div></div>
+            <div class="s-bar-row"><div class="s-bar-l">🇸🇬 Singapore</div><div class="s-bar-track"><div class="s-bar-fill" style="width:70%;background:var(--blue)">35%</div></div></div>
+            <div class="s-bar-row"><div class="s-bar-l">🇻🇳 Vietnam</div><div class="s-bar-track"><div class="s-bar-fill" style="width:38%;background:var(--green)">19%</div></div></div>
+            <div class="s-bar-row"><div class="s-bar-l">🇮🇳 India</div><div class="s-bar-track"><div class="s-bar-fill" style="width:28%;background:var(--green)">14%</div></div></div>
+            <div class="s-bar-row"><div class="s-bar-l">🇳🇬 Nigeria</div><div class="s-bar-track"><div class="s-bar-fill" style="width:16%;background:var(--yellow) dark-text">8%</div></div></div>
+          </div>
+          <div class="s-bignumber">04</div>
+        </div>
+        <div class="s-right">
+          <div class="sey" style="color:var(--deep)">The Four Digital Realities in FMCG</div>
+          <div class="st">Same metric, four completely different strategic implications.</div>
+          <ul class="s-list">
+            <li class="s-li"><span class="s-li-icon">⚡</span><span class="s-li-t"><strong>India's Quick-Commerce:</strong> Blinkit & Zepto deliver grocery in &lt;10 min. SKU assortment follows "emergency restock" logic, not planogram logic. Brands that win here own the impulse moment, not the weekly shop.</span></li>
+            <li class="s-li"><span class="s-li-icon">📱</span><span class="s-li-t"><strong>SEA Social Commerce:</strong> Vietnam, Indonesia, Malaysia are buying via TikTok Shop and Instagram. Discovery = purchase in one tap. Influencer ROI here beats traditional trade investment 3:1 in some categories.</span></li>
+            <li class="s-li"><span class="s-li-icon">🏪</span><span class="s-li-t"><strong>LATAM Super-App Model:</strong> Rappi in Colombia/Mexico has become grocery, restaurant, and pharmacy in one. For FMCG, this is a new retail partner — not just a delivery channel.</span></li>
+            <li class="s-li"><span class="s-li-icon">🇳🇬</span><span class="s-li-t"><strong>Nigeria's Infrastructure Gap (8% e-comm):</strong> Not a demand gap. Urban Nigerians want digital. Mobile payments via M-Pesa-equivalents are accelerating. The unlock is last-mile, not consumer intent.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide" id="sl-5">
+      <div class="s-full">
+        <div class="sey" style="color:var(--blue)">04 · Demographics</div>
+        <div class="st">Two FMCG Worlds. One Product Catalogue. That's the Problem.</div>
+        <div class="ss">A 31-year median age gap separates the youngest market (Nigeria, 18) from the oldest (Japan, 49). The same multinational's portfolio is trying to serve toddler parents in Lagos and retirees in Osaka. Not with different products — with the same ones.</div>
+        <div style="height:1px;background:var(--border);margin:14px 0 18px"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+          <div>
+            <div style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--orange);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--orange)">🔴 Young Populations — Volume & Access Markets</div>
+            <ul class="s-list">
+              <li class="s-li"><span class="s-li-icon">🇳🇬</span><span class="s-li-t"><strong>Nigeria (18 yrs, 230M pop):</strong> Largest young population in Africa. Snacking, beverages, and personal care lead. Sachet economy is the category. Mobile-first, informal retail dominant.</span></li>
+              <li class="s-li"><span class="s-li-icon">🇮🇳</span><span class="s-li-t"><strong>India (28 yrs, 1.44B pop):</strong> World's most important FMCG growth engine. Young consumer + rising income + digital penetration = the rarest combination in modern FMCG history.</span></li>
+              <li class="s-li"><span class="s-li-icon">🇵🇭</span><span class="s-li-t"><strong>Philippines (25 yrs, 118M pop):</strong> BPO-driven income growth creating new middle-class consumers fast. Sari-sari stores still dominant but organized retail converting rapidly.</span></li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--blue)">🔵 Aging Populations — Health & Convenience Markets</div>
+            <ul class="s-list">
+              <li class="s-li"><span class="s-li-icon">🇯🇵</span><span class="s-li-t"><strong>Japan (49 yrs, 124M pop):</strong> Super-aged society. 14,000+ 7-Eleven stores because aging consumers shop small, shop often. Health + functionality labels drive 40% category premium. Portion size is the R&D brief.</span></li>
+              <li class="s-li"><span class="s-li-icon">🇩🇪</span><span class="s-li-t"><strong>Germany (45 yrs, 84M pop):</strong> Sustainability is a purchase criterion, not an aspiration. Aldi/Lidl discipline means value must be proven, not claimed. Private label share exceeds 40% in most FMCG categories.</span></li>
+              <li class="s-li"><span class="s-li-icon">🇰🇷</span><span class="s-li-t"><strong>South Korea (45 yrs, 52M pop):</strong> K-beauty and health premiumization is both domestic and export-led. Coupang's same-day delivery is the baseline. Aging consumers here spend more, not less.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide" id="sl-6">
+      <div class="s-2col">
+        <div class="s-left">
+          <div class="sey">05 · Retail Disruption</div>
+          <div class="stw">The Discount Wave Isn't a Trend. It's a Structural Reset.</div>
+          <div class="ssw">Across every income level and every region, value-engineered retail is winning. This isn't because consumers are "poor" — it's because they've recalibrated what value means after years of inflation and pricing games.</div>
+          <div class="s-stats">
+            <div class="s-stat"><span class="s-stat-n">22K+</span><span class="s-stat-l">OXXO Stores MX</span></div>
+            <div class="s-stat"><span class="s-stat-n">#1</span><span class="s-stat-l">Biedronka Poland</span></div>
+            <div class="s-stat"><span class="s-stat-n">40%+</span><span class="s-stat-l">Private Label DE</span></div>
+          </div>
+          <div style="margin-top:20px;padding:12px;background:rgba(45,109,246,.12);border-left:3px solid var(--blue)">
+            <div style="font-size:9px;font-weight:900;color:var(--blue);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">The Core Tension</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.65);line-height:1.6">Premium brand equity was built in a world where consumers had less information and less options. Discount retail gives them both. The brands surviving are those that justify their premium with actual product superiority — not just marketing spend.</div>
+          </div>
+          <div class="s-bignumber">06</div>
+        </div>
+        <div class="s-right">
+          <div class="sey" style="color:var(--deep)">Who's Winning — Market by Market</div>
+          <div class="st">Five distinct discount models. Each requires a different response from FMCG brands.</div>
+          <ul class="s-list">
+            <li class="s-li"><span class="s-li-icon">🇩🇪</span><span class="s-li-t"><strong>Aldi/Lidl (WE):</strong> Reframed quality expectations globally. Now expanding in US + Australia. Their private label sets the price floor every national brand must justify against.</span></li>
+            <li class="s-li"><span class="s-li-icon">🇨🇳</span><span class="s-li-t"><strong>Pinduoduo (China):</strong> Social group-buying deflated FMCG pricing. Sam's Club surge proves quality narrative can beat discount — but only with genuine product differentiation.</span></li>
+            <li class="s-li"><span class="s-li-icon">🇧🇷</span><span class="s-li-t"><strong>Atacadão/Assaí (Brazil):</strong> Cash-and-carry blurring B2B/B2C. Consumers buy bulk like businesses. SKU rationalization and pack size strategy need to serve both simultaneously.</span></li>
+            <li class="s-li"><span class="s-li-icon">🇨🇴</span><span class="s-li-t"><strong>D1/ARA (Colombia):</strong> Hard discount grew from 0 to 40%+ in 10 years. FMCG multinationals lost distribution access. The lesson: win in hard discount or lose relevance in the store.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide" id="sl-7">
+      <div class="s-full">
+        <div class="sey" style="color:var(--blue)">06 · Urbanization & Modern Trade</div>
+        <div class="st">Every 1pp Urbanization ≈ 2–3% Gain in Organized Retail. The Opportunity Is in the Curve.</div>
+        <div class="ss">The markets furthest left on the urbanization curve have the most modern trade upside. But some markets — notably Vietnam and China — are proving that digital infrastructure can bypass the traditional urbanization→modern trade sequence.</div>
+        <div style="height:1px;background:var(--border);margin:14px 0 18px"></div>
+        <div class="progress-stack">
+          <div class="prog-item"><div class="prog-label"><span>🇸🇬 Singapore — 100% urban</span><span>Premium frontier · 35% e-comm</span></div><div class="prog-track"><div class="prog-fill" style="width:100%;background:var(--blue)"></div></div></div>
+          <div class="prog-item"><div class="prog-label"><span>🇯🇵 Japan — 92% urban</span><span>Mature, aging · 27% e-comm</span></div><div class="prog-track"><div class="prog-fill" style="width:92%;background:var(--deep)"></div></div></div>
+          <div class="prog-item"><div class="prog-label"><span>🇦🇺 Australia — 87% urban</span><span>Mature / premium · 32% e-comm</span></div><div class="prog-track"><div class="prog-fill" style="width:87%;background:var(--deep)"></div></div></div>
+          <div class="prog-item"><div class="prog-label"><span>🇨🇳 China — 67% urban</span><span>Deflationary · 42% e-comm (BROKE THE CURVE)</span></div><div class="prog-track"><div class="prog-fill" style="width:67%;background:var(--lblue)"></div></div></div>
+          <div class="prog-item"><div class="prog-label"><span>🇮🇩 Indonesia — 59% urban</span><span>High-growth · 16% e-comm</span></div><div class="prog-track"><div class="prog-fill" style="width:59%;background:var(--green)"></div></div></div>
+          <div class="prog-item"><div class="prog-label"><span>🇻🇳 Vietnam — 39% urban</span><span>Fast-growth frontier · 19% e-comm (OVERPERFORMING)</span></div><div class="prog-track"><div class="prog-fill" style="width:39%;background:var(--orange)"></div></div></div>
+          <div class="prog-item"><div class="prog-label"><span>🇮🇳 India — 36% urban</span><span style="color:var(--blue);font-weight:800">Biggest FMCG opportunity · 14% e-comm</span></div><div class="prog-track"><div class="prog-fill" style="width:36%;background:var(--blue)"></div></div></div>
+          <div class="prog-item"><div class="prog-label"><span>🇪🇬 Egypt — 43% urban</span><span>Young + growing · 9% e-comm</span></div><div class="prog-track"><div class="prog-fill" style="width:43%;background:var(--pink)"></div></div></div>
+        </div>
+        <div style="margin-top:14px;padding:12px 14px;background:#F4F7FF;border-left:3px solid var(--blue);display:flex;gap:10px">
+          <span style="font-size:13px">🔑</span>
+          <span style="font-size:11px;color:var(--text);line-height:1.6"><strong style="color:var(--blue)">The Vietnam lesson:</strong> 39% urbanization but 19% e-comm — Bach Hoa Xanh and Winmart mini-marts are closing the modern trade gap 10 years ahead of the urbanization curve. For FMCG, distribution density matters more than city density.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div class="slide" id="sl-8">
+      <div class="s-2col">
+        <div class="s-left">
+          <div class="sey">07–08 · APAC Spotlight & Closing</div>
+          <div class="stw">APAC Is Not a Region. It's 13 Separate FMCG Markets Sharing a Name.</div>
+          <div class="ssw">Singapore ($141K GDP PPP) and Pakistan ($8K) are in the same "region." China's deflation and India's 6.5% growth are 2,000 miles apart. The biggest mistake FMCG leaders make: letting regional averages mask individual market realities.</div>
+          <div class="s-stats">
+            <div class="s-stat"><span class="s-stat-n">$141K</span><span class="s-stat-l">SG GDP PPP</span></div>
+            <div class="s-stat"><span class="s-stat-n">1.44B</span><span class="s-stat-l">India Consumers</span></div>
+            <div class="s-stat"><span class="s-stat-n">18×</span><span class="s-stat-l">SG/PK GDP Gap</span></div>
+          </div>
+          <div class="s-bignumber">08</div>
+        </div>
+        <div class="s-right">
+          <div class="sey" style="color:var(--deep)">3 APAC Bets for 2025–2028</div>
+          <div class="st">Where the structural opportunity is. What winning looks like.</div>
+          <ul class="s-list">
+            <li class="s-li" style="border-left-color:var(--blue)"><span class="s-li-icon">🥇</span><span class="s-li-t"><strong>India: Quick-Commerce as Primary Channel.</strong> India grew 7.3% in 2025 — the fastest major economy globally. Blinkit/Zepto/Swiggy Instamart rewriting FMCG go-to-market. The brand that wins in dark stores now owns organized urban retail by 2027.</span></li>
+            <li class="s-li" style="border-left-color:var(--green)"><span class="s-li-icon">🥈</span><span class="s-li-t"><strong>Vietnam: Mini-Mart First-Mover Advantage.</strong> Bach Hoa Xanh (3K+ stores) and Winmart are expanding faster than traditional distribution can adapt. Secure shelf presence now — the window is 18–24 months.</span></li>
+            <li class="s-li" style="border-left-color:var(--lblue)"><span class="s-li-icon">🥉</span><span class="s-li-t"><strong>China: Deflation Is Easing — Premium Window Opens.</strong> China's CPI turned positive (0.2%) for the first time in 12 months. GDP delivered 5.0% in 2025. Sam's Club and premium fresh are already winning. The deflationary FMCG story is shifting — act now.</span></li>
+            <li class="s-li" style="background:#F4F7FF;border-left-color:var(--deep)"><span class="s-li-icon">📋</span><span class="s-li-t"><strong>Sources:</strong> The Economist Big Mac Index Jan 2026 · IMF WEO Oct 2025 + Jan 2026 Update · World Bank · Numbeo/Expatistan · UN Urbanization Prospects 2025 · Euromonitor · Kantar · Bain FMCG Report 2025</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /deck-wrap -->
+</div><!-- /pg-deck -->
+
+<!-- =====================================================================
+     PAGE 5 — ABOUT & SOURCES
+===================================================================== -->
+<div id="pg-about" class="pg">
+
+  <!-- LEAD HERO -->
+  <div class="about-lead">
+    <div style="position:relative;z-index:1">
+      <div style="font-size:9px;color:var(--blue);letter-spacing:3px;text-transform:uppercase;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:10px"><span style="display:block;width:20px;height:2px;background:var(--blue)"></span>Transparency & Methodology</div>
+      <div style="font-size:38px;font-weight:900;color:#fff;line-height:1.05;letter-spacing:-1.5px;margin-bottom:16px">How to Read This Report<br><span style="color:var(--blue)">& Where the Data Comes From</span></div>
+      <div style="font-size:13px;color:rgba(255,255,255,.5);max-width:780px;line-height:1.8">
+        This report was built to help NielsenIQ teams quickly read macro signals across 42 markets without needing a background in economics. Every chart, metric, and color choice has a specific meaning. This page explains all of it — the abbreviations, the data sources, the confidence levels, and the limitations you should be aware of when sharing this internally.
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ── SECTION: WHAT IS THIS REPORT ── -->
+    <div class="sec-head"><div class="sec-title">What This Report Is — and Isn't</div><div class="sec-line"></div><div class="sec-tag">Purpose & Scope</div></div>
+    <div class="about-2col">
+      <div class="acard">
+        <div class="acard-accent" style="background:var(--blue)"></div>
+        <h3>Purpose</h3>
+        <p>This dashboard compiles publicly available macro-economic, demographic, and retail indicators across 42 markets into a single view for <strong>FMCG and retail strategic planning</strong>. It is designed for internal NielsenIQ teams — analytics, customer success, commercial, and leadership — to quickly benchmark markets, spot structural patterns, and frame client conversations.</p>
+        <p>Think of it as a <strong>macro context layer</strong>, not a primary research tool. The data should inform judgment, not replace it. <strong>Last updated: March 2026.</strong> This version uses The Economist Big Mac Index (January 2026), IMF WEO October 2025 + January 2026 Update, and UN demographic data (WPP 2024, WUP 2025).</p>
+      </div>
+      <div class="acard">
+        <div class="acard-accent" style="background:var(--orange)"></div>
+        <h3>What It Is Not</h3>
+        <p>This report is <strong>not a primary NIQ retail measurement study</strong>. It does not use NIQ panel data, POS data, or proprietary consumer surveys. The e-commerce penetration figures, Coca-Cola prices, and qualitative market signals are estimates from public third-party sources — they are directionally useful but should not be cited as precise figures in external client presentations without additional validation.</p>
+        <p>For external use, please add the footnote provided at the bottom of this page. Data currency: Big Mac prices are from <strong>January 2026</strong>; macro indicators from <strong>IMF WEO October 2025 + January 2026 Update</strong>.</p>
+      </div>
+    </div>
+
+    <!-- ── SECTION: HOW TO READ ── -->
+    <div class="sec-head"><div class="sec-title">How to Read Each Section</div><div class="sec-line"></div><div class="sec-tag">Navigation Guide</div></div>
+    <div class="tips-grid">
+      <div class="tip-item"><div class="tip-num">1</div><div class="tip-text"><strong>Overview tab</strong> — Start here. The five signal cards at the top give you the macro story in 30 seconds. Scroll down for charts. Every chart has an insight box below it — that's the FMCG implication, not just the data point.</div></div>
+      <div class="tip-item"><div class="tip-num">2</div><div class="tip-text"><strong>Market Signals tab</strong> — Go here when you need to understand structural drivers: demographics, GDP growth, private consumption, and urbanization. These are the slower-moving forces that explain why e-commerce or modern trade behaves differently across markets.</div></div>
+      <div class="tip-item"><div class="tip-num">3</div><div class="tip-text"><strong>Data Explorer tab</strong> — Full table with all 42 markets and 16 indicators. Click any column header to sort. Use the search box to find a specific market. Use the region and signal filters to create subsets. Hover the Insight column to read the full text.</div></div>
+      <div class="tip-item"><div class="tip-num">4</div><div class="tip-text"><strong>Strategy Deck tab</strong> — Eight slides built for briefing your team or a client. Each slide has a tension ("the problem"), a set of market examples, and an implication for FMCG strategy. Use ← → arrow keys or the buttons to navigate. This is the shareable layer.</div></div>
+      <div class="tip-item"><div class="tip-num">5</div><div class="tip-text"><strong>Color coding in charts</strong> — Colors are always intentional. <span style="color:var(--blue);font-weight:800">Blue = benchmark or neutral positive</span>. <span style="color:var(--orange);font-weight:800">Orange = risk or outlier</span>. <span style="color:var(--green);font-weight:800">Green = high growth or strong signal</span>. <span style="color:var(--yellow);font-weight:800">Yellow = moderate or watch zone</span>. See the full legend below.</div></div>
+      <div class="tip-item"><div class="tip-num">6</div><div class="tip-text"><strong>The Bubble charts</strong> — Bubble size always represents population. X-axis is the first economic dimension (GDP or urbanization), Y-axis is the second (inflation or e-commerce). Color identifies the region. Hover any bubble for the full market detail tooltip.</div></div>
+    </div>
+
+    <!-- ── SECTION: METRICS GLOSSARY ── -->
+    <div class="sec-head"><div class="sec-title">Metric Glossary — Every Abbreviation Explained</div><div class="sec-line"></div><div class="sec-tag">Definitions & Confidence</div></div>
+    <div class="metric-grid">
+
+      <div class="metric-tile">
+        <div class="mt-icon">🍔</div>
+        <div class="mt-body">
+          <div class="mt-abbr">Big Mac ($)</div>
+          <div class="mt-full">Big Mac Price in USD</div>
+          <div class="mt-desc">The local retail price of a McDonald's Big Mac burger, converted to US dollars at market exchange rates. Used as a global proxy for purchasing power and consumer price levels across markets. The US baseline price rose from $5.79 (Jan 2025) to $6.12 (Jan 2026), reflecting broader US price inflation.</div>
+          <div class="mt-source">The Economist · Jan 2026</div>
+          <div class="mt-conf conf-high">✅ High Confidence</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">📊</div>
+        <div class="mt-body">
+          <div class="mt-abbr">BM Index (%)</div>
+          <div class="mt-full">Big Mac Index vs. US Baseline</div>
+          <div class="mt-desc">How over- or undervalued a currency is relative to the US dollar, using the Big Mac as reference. Negative = local currency undervalued vs USD. Positive = overvalued. Calculated as: (local price / US $5.79) – 1.</div>
+          <div class="mt-source">The Economist · Jan 2026</div>
+          <div class="mt-conf conf-high">✅ High Confidence</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">🧃</div>
+        <div class="mt-body">
+          <div class="mt-abbr">Coke 2L ($)</div>
+          <div class="mt-full">Coca-Cola 2-Liter Price (USD)</div>
+          <div class="mt-desc">Retail price of a 2-liter Coca-Cola bottle in USD. Used as a complementary FMCG price proxy to the Big Mac. Together they reveal price-pack architecture headroom per market.</div>
+          <div class="mt-source">Numbeo / Expatistan · 2025 est.</div>
+          <div class="mt-conf conf-med">⚠️ Estimate (±15–20%)</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">🏦</div>
+        <div class="mt-body">
+          <div class="mt-abbr">GDP PPP ($)</div>
+          <div class="mt-full">GDP per Capita, Purchasing Power Parity</div>
+          <div class="mt-desc">GDP per person adjusted for cost-of-living differences across countries, expressed in international dollars. This is a better cross-country wealth comparator than nominal GDP because it accounts for what money actually buys locally.</div>
+          <div class="mt-source">IMF WEO · Oct 2025 + Jan 2026 Update</div>
+          <div class="mt-conf conf-high">✅ High Confidence</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">🔥</div>
+        <div class="mt-body">
+          <div class="mt-abbr">CPI % / Inflation</div>
+          <div class="mt-full">Annual Consumer Price Inflation Rate</div>
+          <div class="mt-desc">The year-on-year percentage change in the consumer price index. Above 10% = high inflation, material downtrading risk. Above 20% = hyperinflation, structural basket disruption. Below 0% = deflation, purchase deferral behavior.</div>
+          <div class="mt-source">IMF WEO · Oct 2025 + Jan 2026 Update</div>
+          <div class="mt-conf conf-high">✅ High Confidence</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">🛒</div>
+        <div class="mt-body">
+          <div class="mt-abbr">Pvt Cons. (%)</div>
+          <div class="mt-full">Private Consumption as % of GDP</div>
+          <div class="mt-desc">Household final consumption expenditure divided by total GDP. A high percentage (70%+) means the economy is consumer-driven — every point of GDP growth translates almost directly into consumer spending. Critical for sizing FMCG market opportunity.</div>
+          <div class="mt-source">World Bank · 2023 actuals</div>
+          <div class="mt-conf conf-high">✅ High Confidence</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">🏙️</div>
+        <div class="mt-body">
+          <div class="mt-abbr">Urban (%)</div>
+          <div class="mt-full">Urbanization Rate</div>
+          <div class="mt-desc">The share of the total population living in urban areas. Strongly correlated with modern trade penetration — every 1 percentage point increase in urbanization is associated with ~2–3% growth in organized retail. Markets below 50% urban have the highest modern trade upside.</div>
+          <div class="mt-source">UN WUP · 2025 projections</div>
+          <div class="mt-conf conf-high">✅ High Confidence</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">📈</div>
+        <div class="mt-body">
+          <div class="mt-abbr">GDP Gr. (%)</div>
+          <div class="mt-full">Real GDP Growth Rate</div>
+          <div class="mt-desc">The year-on-year percentage change in real (inflation-adjusted) GDP. This is the core volume signal — growing economies expand the consumer base. Above 4% = high-growth market. Below 0% = contraction risk for FMCG.</div>
+          <div class="mt-source">IMF WEO · Oct 2025 + Jan 2026 Update forecast</div>
+          <div class="mt-conf conf-high">✅ High Confidence</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">👔</div>
+        <div class="mt-body">
+          <div class="mt-abbr">Unemp. (%)</div>
+          <div class="mt-full">Unemployment Rate</div>
+          <div class="mt-desc">Percentage of the labor force actively seeking work but unemployed. High unemployment suppresses disposable income and consumer confidence, directly reducing FMCG basket sizes and trading down frequency. Uses ILO harmonized methodology for comparability.</div>
+          <div class="mt-source">ILO ILOSTAT · 2025 modelled</div>
+          <div class="mt-conf conf-high">✅ High Confidence</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">👥</div>
+        <div class="mt-body">
+          <div class="mt-abbr">Median Age</div>
+          <div class="mt-full">Median Age of Population (years)</div>
+          <div class="mt-desc">The age that divides the population exactly in half. Below 30 = young market (volume, access, impulse categories). Above 43 = aging market (health, convenience, smaller portions). The single most predictive demographic for FMCG category mix.</div>
+          <div class="mt-source">UN WPP · 2024 estimates</div>
+          <div class="mt-conf conf-high">✅ High Confidence</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">📱</div>
+        <div class="mt-body">
+          <div class="mt-abbr">E-Comm (%)</div>
+          <div class="mt-full">E-Commerce FMCG Penetration</div>
+          <div class="mt-desc">Estimated share of total FMCG grocery retail purchased online (including food delivery, quick-commerce, and traditional e-commerce). There is no single global official source — figures are estimates from Euromonitor, eMarketer, and industry reports. Treat as directional.</div>
+          <div class="mt-source">Euromonitor / eMarketer / industry est.</div>
+          <div class="mt-conf conf-est">🔴 Estimate — directional only</div>
+        </div>
+      </div>
+
+      <div class="metric-tile">
+        <div class="mt-icon">🏷️</div>
+        <div class="mt-body">
+          <div class="mt-abbr">Pop M</div>
+          <div class="mt-full">Population (millions)</div>
+          <div class="mt-desc">Total population in millions for 2025. Used as bubble size in scatter charts. Represents the absolute consumer base size — critical for prioritizing market investment alongside GDP growth and e-commerce penetration signals.</div>
+          <div class="mt-source">UN WPP · 2024 estimates</div>
+          <div class="mt-conf conf-high">✅ High Confidence</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── COLOR LEGEND ── -->
+    <div class="sec-head"><div class="sec-title">Color System</div><div class="sec-line"></div><div class="sec-tag">NielsenIQ Brand Palette — Meaning in This Report</div></div>
+    <div class="color-legend">
+      <div class="cl-item"><div class="cl-swatch" style="background:#2D6DF6"></div><div class="cl-name">Bright Blue</div><div class="cl-hex">#2D6DF6</div><div class="cl-use">Primary brand color. Used for benchmarks, neutral-positive signals, selected bars, and UI accents.</div></div>
+      <div class="cl-item"><div class="cl-swatch" style="background:#060A45"></div><div class="cl-name">Deep Blue</div><div class="cl-hex">#060A45</div><div class="cl-use">Brand primary background. Used for headers, dark panels, and data density in bar charts.</div></div>
+      <div class="cl-item"><div class="cl-swatch" style="background:#EF5F17"></div><div class="cl-name">Orange</div><div class="cl-hex">#EF5F17</div><div class="cl-use">Risk and outlier signal. Inflation above 10%, negative GDP growth, hyperinflation markets, and caution flags.</div></div>
+      <div class="cl-item"><div class="cl-swatch" style="background:#59AD00"></div><div class="cl-name">Green</div><div class="cl-hex">#59AD00</div><div class="cl-use">High growth and strong positive signal. GDP growth above 4%, Western Europe in region charts, top e-commerce markets.</div></div>
+      <div class="cl-item"><div class="cl-swatch" style="background:#FFB500"></div><div class="cl-name">Yellow</div><div class="cl-hex">#FFB500</div><div class="cl-use">Watch zone and moderate signal. Inflation between 7–20%, moderate signals requiring attention but not alarm.</div></div>
+      <div class="cl-item"><div class="cl-swatch" style="background:#31D1FF"></div><div class="cl-name">Light Blue</div><div class="cl-hex">#31D1FF</div><div class="cl-use">APAC region identifier in bubble and scatter charts. Also used for digital/e-commerce emphasis.</div></div>
+      <div class="cl-item"><div class="cl-swatch" style="background:#EF5890"></div><div class="cl-name">Pink</div><div class="cl-hex">#EF5890</div><div class="cl-use">Latin America region identifier in bubble and scatter charts.</div></div>
+    </div>
+
+    <!-- ── REGION CODES ── -->
+    <div class="sec-head"><div class="sec-title">Region Codes</div><div class="sec-line"></div><div class="sec-tag">42 Markets · 5 Regions</div></div>
+    <div class="region-legend">
+      <div class="rl-item"><div class="rl-dot" style="background:#2D6DF6"></div><div class="rl-label">Americas</div><div class="rl-code" style="background:#EEF3FF;color:#2D6DF6">US</div><div class="rl-mkts">United States, Canada</div></div>
+      <div class="rl-item"><div class="rl-dot" style="background:#59AD00"></div><div class="rl-label">Western Europe</div><div class="rl-code" style="background:#F0F9E8;color:#3A7A00">WE</div><div class="rl-mkts">Germany, UK, France, Spain, Italy, Switzerland, Netherlands, Sweden</div></div>
+      <div class="rl-item"><div class="rl-dot" style="background:#EF5F17"></div><div class="rl-label">EEMEA</div><div class="rl-code" style="background:#FFF3EE;color:#B04000">EEMEA</div><div class="rl-mkts">Eastern Europe, Middle East & Africa — Poland, Turkey, Saudi Arabia, UAE, South Africa, Egypt, Nigeria, Czech Republic, Romania, Kenya, Pakistan</div></div>
+      <div class="rl-item"><div class="rl-dot" style="background:#31D1FF"></div><div class="rl-label">Asia-Pacific</div><div class="rl-code" style="background:#E4F8FF;color:#006A8A">APAC</div><div class="rl-mkts">China, Japan, India, Indonesia, South Korea, Australia, Thailand, Vietnam, Singapore, Philippines, Malaysia, Taiwan (13 markets)</div></div>
+      <div class="rl-item"><div class="rl-dot" style="background:#EF5890"></div><div class="rl-label">Latin America</div><div class="rl-code" style="background:#FDF0F6;color:#A02060">LATAM</div><div class="rl-mkts">Brazil, Mexico, Argentina, Colombia, Chile, Peru, Uruguay, Costa Rica, Guatemala</div></div>
+    </div>
+
+    <!-- ── MARKET SIGNALS ── -->
+    <div class="sec-head"><div class="sec-title">FMCG Market Signal — Definitions & Classification Criteria</div><div class="sec-line"></div><div class="sec-tag">Qualitative Labels · Data Explorer Column</div></div>
+
+    <div class="acard" style="margin-bottom:20px">
+      <div class="acard-accent" style="background:var(--blue)"></div>
+      <h3>How Market Signals Are Assigned</h3>
+      <p>The Market Signal is a <strong>qualitative label synthesized from the 11 quantitative indicators</strong> in this dataset. It is not a published NIQ metric, not an official classification, and not derived from a scoring algorithm. It represents analyst judgment applied consistently across markets to produce a one-line strategic positioning statement.</p>
+      <p style="margin-top:10px">Each signal is assigned by evaluating a primary trigger condition (the dominant characteristic of the market) and one or more secondary conditions that confirm the classification. The criteria below are the explicit rules used. When a market sits on the boundary between two signals, the primary trigger takes precedence.</p>
+      <p style="margin-top:10px;padding:10px 12px;background:#FFF8EC;border-left:3px solid var(--yellow);font-size:11px;color:#7A4800"><strong>Internal use only.</strong> Do not cite as a NielsenIQ proprietary classification in external client presentations. Use the label as a conversation frame, not a deliverable.</p>
+    </div>
+
+    <!-- CRITERIA TABLE -->
+    <div style="overflow-x:auto;margin-bottom:24px">
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <thead>
+          <tr>
+            <th style="background:var(--deep);color:rgba(255,255,255,.75);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;text-align:left;width:180px;font-weight:700">Signal Label</th>
+            <th style="background:var(--deep);color:rgba(255,255,255,.75);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;text-align:left;font-weight:700">Primary Trigger</th>
+            <th style="background:var(--deep);color:rgba(255,255,255,.75);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;text-align:left;font-weight:700">Secondary Conditions</th>
+            <th style="background:var(--deep);color:rgba(255,255,255,.75);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;text-align:left;font-weight:700">FMCG Strategic Implication</th>
+            <th style="background:var(--deep);color:rgba(255,255,255,.75);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;text-align:left;width:130px;font-weight:700">Markets in Dataset</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- HIGH GROWTH ENGINE -->
+          <tr style="border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#E8F5D8;font-weight:800;color:#1A5200;vertical-align:top">🚀 High Growth Engine</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">Real GDP growth <strong>≥ 6%</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Population &gt; 100M <strong>AND</strong> median age &lt; 32 <strong>AND</strong> e-commerce &lt; 20% (still expanding). Markets where volume, digital penetration, and middle-class formation are all accelerating simultaneously.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Highest priority for volume investment. Route-to-market innovation required (quick-commerce, mini-mart). Every 1% GDP growth adds millions of new addressable consumers.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A5200;font-weight:700">🇮🇳 India (7.3%)</td>
+          </tr>
+
+          <!-- HIGH GROWTH -->
+          <tr style="background:#FAFBFD;border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#F0F9E8;font-weight:800;color:#2E6600;vertical-align:top">📈 High Growth</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">Real GDP growth <strong>3–6%</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Inflation &lt; 6% <strong>AND</strong> urbanization accelerating <strong>OR</strong> modern trade actively expanding. Growth is translating into purchasing power, not being eroded by inflation.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Strong volume opportunity. Distribution investment ahead of modernization curve pays off. Price architecture should balance access tiers with emerging mid-tier.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#2E6600;font-weight:700">🇵🇱 Poland · 🇰🇪 Kenya · 🇳🇬 Nigeria · 🇪🇬 Egypt · 🇸🇦 Saudi Arabia · 🇵🇭 Philippines · 🇲🇾 Malaysia</td>
+          </tr>
+
+          <!-- FAST GROWTH FRONTIER -->
+          <tr style="border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#E8F5D8;font-weight:800;color:#2E6600;vertical-align:top">⚡ Fast Growth Frontier</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">Real GDP growth <strong>≥ 5%</strong> <strong>AND</strong> urbanization <strong>&lt; 50%</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">E-commerce growing above urbanization expectations (i.e. digital infrastructure ahead of physical). Modern trade expanding faster than demographic curve would predict.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">First-mover advantage in distribution is closing fast. Mini-mart and convenience formats compressing the urbanization-to-modern-trade timeline. Act in the next 18–24 months.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#2E6600;font-weight:700">🇻🇳 Vietnam (6.5%, 39% urban)</td>
+          </tr>
+
+          <!-- EMERGING POWERHOUSE -->
+          <tr style="background:#FAFBFD;border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#E2F4FD;font-weight:800;color:#006A8A;vertical-align:top">🌱 Emerging Powerhouse / Modern</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">Real GDP growth <strong>4–5%</strong> <strong>AND</strong> population <strong>&gt; 30M</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Urbanization 50–80% <strong>AND</strong> modern trade actively displacing informal retail <strong>AND</strong> inflation &lt; 5%. Rising middle class with expanding organized retail access.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Medium-term volume opportunity. Modern trade investment now. Price architecture needs to straddle informal and organized channels simultaneously.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#006A8A;font-weight:700">🇮🇩 Indonesia · 🇲🇾 Malaysia · 🇨🇴 Colombia · 🇷🇴 Romania · 🇨🇿 Czech Republic</td>
+          </tr>
+
+          <!-- MATURE PREMIUM -->
+          <tr style="border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#EEF3FF;font-weight:800;color:#2D6DF6;vertical-align:top">🏆 Mature / Premium</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">GDP PPP <strong>&gt; $55K</strong> <strong>AND</strong> inflation <strong>&lt; 3%</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Median age &gt; 38 <strong>AND</strong> modern trade fully established <strong>AND</strong> e-commerce &lt; 25%. GDP growth typically 0.5–2%. Volume growth is low; value growth comes from premiumization, health, and convenience.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Category development and brand equity investment. Health, sustainability, and provenance are purchase drivers. Pack size optimization toward smaller, higher-value formats.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#2D6DF6;font-weight:700">🇺🇸 US · 🇨🇦 Canada · 🇫🇷 France · 🇦🇺 Australia · 🇨🇭 Switzerland · 🇮🇹 Italy</td>
+          </tr>
+
+          <!-- MATURE DIGITAL -->
+          <tr style="background:#FAFBFD;border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#EEF3FF;font-weight:800;color:#2D6DF6;vertical-align:top">💻 Mature / Digital</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">GDP PPP <strong>&gt; $55K</strong> <strong>AND</strong> e-commerce <strong>≥ 25%</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Inflation &lt; 3% <strong>AND</strong> physical retail stable but digital is the growth vector. Same-day or next-day delivery is consumer baseline expectation.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Omnichannel is non-negotiable. Digital shelf, search, and ratings are as important as physical placement. DTC and platform strategies must be market-specific.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#2D6DF6;font-weight:700">🇬🇧 UK · 🇳🇱 Netherlands · 🇰🇷 South Korea · 🇸🇪 Sweden · 🇹🇼 Taiwan</td>
+          </tr>
+
+          <!-- MATURE AGING / SLOW -->
+          <tr style="border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#F2F2F2;font-weight:800;color:#555;vertical-align:top">🕰 Mature / Aging · Slow</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">Median age <strong>&gt; 45</strong> <strong>AND</strong> GDP growth <strong>&lt; 1%</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">GDP PPP &gt; $50K <strong>AND</strong> population declining or stagnant. Structural demand shift toward health, functionality, convenience, and smaller portion sizes.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Demographic-driven portfolio shift. Functional and health claims drive premium. Convenience formats (konbini, small-store) gaining vs. hypermarkets. Category innovation is the growth lever.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#555;font-weight:700">🇯🇵 Japan · 🇮🇹 Italy · 🇩🇪 Germany</td>
+          </tr>
+
+          <!-- PREMIUM NICHE / CITY-STATE -->
+          <tr style="background:#FAFBFD;border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#EEF3FF;font-weight:800;color:#2D6DF6;vertical-align:top">💎 Premium Niche / City-State</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">GDP PPP <strong>&gt; $90K</strong> <strong>AND</strong> population <strong>&lt; 15M</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Inflation &lt; 2.5% <strong>AND</strong> urbanization &gt; 70%. Extremely high income concentrated in a small geography. Price anchors for the broader region — what sells here at premium sets aspirational ceiling for neighbors.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Global premium benchmark market. Not a volume play. Use for brand credibility, pricing reference, and test-and-learn for premium innovations before broader rollout.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#2D6DF6;font-weight:700">🇸🇬 Singapore ($161K) · 🇨🇭 Switzerland ($97K)</td>
+          </tr>
+
+          <!-- INFLATION DISTORTED -->
+          <tr style="border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#FDECEA;font-weight:800;color:#B71C1C;vertical-align:top">🔥 Inflation Distorted</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">CPI inflation <strong>&gt; 15%</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">All other KPIs are distorted. Big Mac price in USD may look high (currency devaluation) or basket data may look stable (substitution effects). GDP growth in real terms is compressed. Consumer behavior driven by price frequency, not value.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Survival mode for branded FMCG. Local brands and private label win. Basket fragmentation, smaller pack sizes, higher trip frequency. Promotional ROI collapses. Invest in brand equity but manage working capital tightly.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#B71C1C;font-weight:700">🇹🇷 Turkey (24.7%) · 🇳🇬 Nigeria (17%)</td>
+          </tr>
+
+          <!-- RECOVERY / INFLATION -->
+          <tr style="background:#FAFBFD;border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#FFF0D0;font-weight:800;color:#7A4800;vertical-align:top">📉→📈 Recovery / Inflation</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">CPI inflation <strong>10–20%</strong> declining from a higher peak <strong>AND</strong> GDP growth turning positive</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Inflation trending down year-on-year <strong>AND</strong> currency stabilizing. Consumer behavior still cautious but improving. Private label at peak share — branded recovery possible within 12–18 months.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Watch market. The window to reintroduce branded premium is opening. First movers in value-tier rebuild will capture share. Do not exit — reposition.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#7A4800;font-weight:700">🇦🇷 Argentina (16.4%, down from 60%) · 🇪🇬 Egypt (13.5%)</td>
+          </tr>
+
+          <!-- DEFLATIONARY -->
+          <tr style="border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#E4F8FF;font-weight:800;color:#006A8A;vertical-align:top">❄️ Deflationary + Digital</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">CPI inflation <strong>≤ 0.5%</strong> <strong>AND</strong> e-commerce <strong>&gt; 35%</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">GDP growth still positive but consumer sentiment deflationary (purchase deferral behavior). Discount platforms dominating. Quality narrative the only way to justify price in this environment.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Do not compete on price — the floor is always lower. Invest in quality differentiation, provenance, and brand trust. Sam&#39;s Club and premium fresh formats show the viable alternative.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#006A8A;font-weight:700">🇨🇳 China (0.2% CPI, 42% e-comm)</td>
+          </tr>
+
+          <!-- FRONTIER -->
+          <tr style="background:#FAFBFD;border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#FDECEA;font-weight:800;color:#B71C1C;vertical-align:top">🌐 Frontier / High Potential</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">GDP PPP <strong>&lt; $10K</strong> <strong>AND</strong> population <strong>&gt; 50M</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Modern trade penetration &lt; 30% <strong>AND</strong> informal retail dominant. E-commerce typically &lt; 10%. Long-run volume potential significant but requires non-standard distribution (sachet economy, mobile payments, informal trade partnerships).</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Volume play, not margin play. Sachet formats unlock access. Mobile payment infrastructure is the e-commerce enabler. Patience required — 5–10 year horizon for meaningful return on modern trade investment.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#B71C1C;font-weight:700">🇳🇬 Nigeria · 🇰🇪 Kenya · 🇵🇰 Pakistan</td>
+          </tr>
+
+          <!-- DUAL ECONOMY -->
+          <tr style="border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#FFF3EE;font-weight:800;color:#7A2200;vertical-align:top">⚖️ Dual Economy</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">Unemployment <strong>&gt; 25%</strong> <strong>AND</strong> GDP PPP <strong>&lt; $20K</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Extreme inequality (top income segment vs. mass market). Two entirely different FMCG markets coexist within the same country — premium modern trade for high earners, sachet economy for the majority. Single portfolio strategy does not work.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Requires a two-portfolio approach. Premium imported brands for top-income urban consumers. Sachet, local manufacturing, and price-locked SKUs for mass market. Route-to-market must serve both simultaneously.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#7A2200;font-weight:700">🇿🇦 South Africa (32.8% unemploy.)</td>
+          </tr>
+
+          <!-- STABLE -->
+          <tr style="background:#FAFBFD;border-bottom:1px solid #F0F2F8">
+            <td style="padding:11px 14px;background:#F2F2F2;font-weight:800;color:#555;vertical-align:top">⚓ Stable / Strategic</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#1A1A2E">GDP growth <strong>1–3%</strong> <strong>AND</strong> inflation <strong>&lt; 5%</strong></td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Modern trade established <strong>AND</strong> no dominant structural disruption (not hyperinflation, not deflation, not frontier). Market performing within expected range. Predictable consumer behavior. Strategic importance often exceeds economic size (e.g. geographic hub, cultural influence).</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#444;line-height:1.65">Maintain and defend. Promotional efficiency and shelf execution matter more than market development spend. Trade partnership quality is the primary competitive lever.</td>
+            <td style="padding:11px 14px;vertical-align:top;color:#555;font-weight:700">🇲🇽 Mexico · 🇨🇱 Chile · 🇵🇪 Peru · 🇨🇷 Costa Rica · 🇬🇹 Guatemala</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CLASSIFICATION NOTE -->
+    <div style="background:var(--deep);padding:20px 24px;margin-bottom:24px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue)"></div>
+      <div style="font-size:10px;font-weight:800;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">Important: How to Apply These Criteria</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
+        <div>
+          <div style="font-size:10px;font-weight:800;color:#fff;margin-bottom:6px">Primary trigger wins</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.6);line-height:1.65">When a market qualifies for multiple signals, the most structurally dominant condition takes precedence. Argentina qualifies as both Recovery and High Growth — Recovery wins because inflation is still the dominant consumer behavior driver.</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:800;color:#fff;margin-bottom:6px">Signals are point-in-time</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.6);line-height:1.65">Markets move between signals as indicators change. Argentina moved from Inflation Distorted (2024) to Recovery (2025) in 12 months. China may move from Deflationary to Stable as CPI normalizes. Update classification with each data refresh.</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:800;color:#fff;margin-bottom:6px">Internal framing only</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.6);line-height:1.65">These labels are an internal thinking tool. Do not present them in client deliverables as a NielsenIQ methodology without additional documentation. If a client asks how signals are defined, this criteria table is the reference to share.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DATA SOURCES ── -->
+    <div class="sec-head"><div class="sec-title">Data Sources</div><div class="sec-line"></div><div class="sec-tag">All 11 Indicators · Provenance & Reliability</div></div>
+
+    <div class="disclaimer">
+      <h4>⚠️ Transparency Note on E-Commerce Data</h4>
+      <p>There is no single global official database that publishes "FMCG e-commerce as % of grocery retail" across all 42 markets using a consistent methodology. Different providers (Euromonitor, eMarketer, Kantar, Statista) measure different things: some cover online grocery only, others include food delivery, others use different base years. The e-commerce figures in this report are estimates compiled from multiple industry sources and should be treated as <strong>directional benchmarks, not precise measurements</strong>. The most reliable figures are for China, UK, US, South Korea, Japan, and Australia — where multiple independent sources align. The least reliable are for Sub-Saharan Africa, Central America, and Pakistan, where published data is very limited.</p>
+    </div>
+
+    <div class="source-grid">
+
+      <div class="src-card">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue)"></div>
+        <div class="src-badge" style="background:#EAF5E0;color:#2E6600">✅ Verified</div>
+        <div class="src-name">The Economist — Big Mac Index</div>
+        <div class="src-url">economist.com/big-mac-index</div>
+        <div class="src-covers"><strong>Covers:</strong> Big Mac Price (USD), Big Mac Index vs. US (%). Published January 2026. US baseline: $6.12 (up from $5.79 in Jan 2025). The index is calculated as: (local Big Mac price in USD / $6.12) − 1. Raw data available on GitHub: TheEconomist/big-mac-data. Covers 54 countries.</div>
+        <div class="src-note">This is the most commonly cited informal purchasing-power-parity measure in economics journalism. Consistent methodology since 1986.</div>
+      </div>
+
+      <div class="src-card">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue)"></div>
+        <div class="src-badge" style="background:#EAF5E0;color:#2E6600">✅ Verified</div>
+        <div class="src-name">IMF World Economic Outlook</div>
+        <div class="src-url">imf.org/en/publications/weo/issues/2025/10/14/weo-october-2025<br>imf.org/en/publications/weo/issues/2026/01/19/weo-update-january-2026</div>
+        <div class="src-covers"><strong>Covers:</strong> GDP per Capita PPP (NGDPdpc), Real GDP Growth % (NGDP_RPCH), CPI Inflation % (PCPIPCH), Unemployment Rate (LUR). Download the WEO database directly from the IMF website and filter by country and indicator code to verify any figure.</div>
+        <div class="src-note">The October 2025 WEO is the most complete country-level release (full statistical appendix). The January 2026 Update revised India growth to 7.3%, China to 5.0%, Argentina to +4.0%. GDP growth figures are IMF projections, not actuals — the next full release is April 2026.</div>
+      </div>
+
+      <div class="src-card">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue)"></div>
+        <div class="src-badge" style="background:#EAF5E0;color:#2E6600">✅ Verified</div>
+        <div class="src-name">United Nations — WPP & WUP</div>
+        <div class="src-url">population.un.org/wpp · population.un.org/wup</div>
+        <div class="src-covers"><strong>Covers:</strong> Population (UN World Population Prospects 2024), Median Age (UN WPP 2024), Urbanization Rate % (UN World Urbanization Prospects 2025). These are 2025 projections based on census data and demographic modeling.</div>
+        <div class="src-note">UN demographic projections are the global standard used by governments, the World Bank, and academic institutions. Methodology is consistent across all 42 markets.</div>
+      </div>
+
+      <div class="src-card">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue)"></div>
+        <div class="src-badge" style="background:#EAF5E0;color:#2E6600">✅ Verified</div>
+        <div class="src-name">World Bank — National Accounts</div>
+        <div class="src-url">data.worldbank.org/indicator/NE.CON.PRVT.ZS</div>
+        <div class="src-covers"><strong>Covers:</strong> Private Consumption as % of GDP (NE.CON.PRVT.ZS). Note: most recent actuals are 2023 data — 2025 values reflect the last available year, not a forecast. Use indicator code to verify each country.</div>
+        <div class="src-note">Private consumption data typically lags 1–2 years. The 2023 figures are used as a structural proxy — this metric changes slowly and the lag does not materially affect strategic interpretation.</div>
+      </div>
+
+      <div class="src-card">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue)"></div>
+        <div class="src-badge" style="background:#EAF5E0;color:#2E6600">✅ Verified</div>
+        <div class="src-name">ILO — ILOSTAT</div>
+        <div class="src-url">ilostat.ilo.org · ILO modelled estimates</div>
+        <div class="src-covers"><strong>Covers:</strong> Unemployment Rate (%). ILO uses a harmonized methodology across all countries, which makes cross-market comparisons valid. This is preferred over national statistics bureaus for consistency. Note: some markets use national definitions that differ from ILO harmonized rates.</div>
+        <div class="src-note">ILO modelled unemployment estimates use a common framework across countries — critical for valid comparisons between, for example, Nigeria and Germany.</div>
+      </div>
+
+      <div class="src-card">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:#EF5F17"></div>
+        <div class="src-badge" style="background:#FFF3D0;color:#7A4800">⚠️ Estimate</div>
+        <div class="src-name">Numbeo & Expatistan</div>
+        <div class="src-url">numbeo.com · expatistan.com</div>
+        <div class="src-covers"><strong>Covers:</strong> Coca-Cola 2L Price (USD). Crowdsourced cost-of-living platforms. Users in each country submit local retail prices, which are averaged. Methodology is not audited and prices vary significantly within a country (urban vs. rural, supermarket vs. convenience store).</div>
+        <div class="src-note">Treat Coke prices as approximate illustrations (±15–20% margin). For precise retail pricing, NIQ's own measurement data per market would be the authoritative source.</div>
+      </div>
+
+      <div class="src-card">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:#EF5F17"></div>
+        <div class="src-badge" style="background:#FDECEA;color:#B71C1C">🔴 Multi-source est.</div>
+        <div class="src-name">E-Commerce: Euromonitor, eMarketer & Industry</div>
+        <div class="src-url">euromonitor.com · emarketer.com · various national reports</div>
+        <div class="src-covers"><strong>Covers:</strong> E-Commerce FMCG Penetration (%). Compiled from multiple sources including Euromonitor Passport, eMarketer forecasts, national e-commerce associations (AMVO Mexico, VECOM Vietnam, ARMO Romania, etc.), and platform-level data where available.</div>
+        <div class="src-note">Cross-market comparisons are directional only. High confidence: China, UK, US, South Korea, Japan, Australia. Low confidence: Guatemala, Pakistan, Kenya, Uruguay, Costa Rica. For precise market-level data, NIQ Connect has proprietary measurement available.</div>
+      </div>
+
+      <div class="src-card">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--gray)"></div>
+        <div class="src-badge" style="background:#F2F2F2;color:#555">Internal</div>
+        <div class="src-name">NielsenIQ Analyst Synthesis</div>
+        <div class="src-url">Internal — not externally citable</div>
+        <div class="src-covers"><strong>Covers:</strong> FMCG Market Signal (qualitative label), Key Consumer Insight (written commentary). These fields are constructed by layering all quantitative indicators and interpreting them through an FMCG lens. They reflect analyst judgment, not a published classification system.</div>
+        <div class="src-note">For internal framing and team briefings only. Should not be cited in client deliverables as a NielsenIQ proprietary finding without additional methodology documentation.</div>
+      </div>
+
+    </div>
+
+    <!-- ── CONFIDENCE TABLE ── -->
+    <div class="sec-head"><div class="sec-title">Quick Confidence Reference</div><div class="sec-line"></div><div class="sec-tag">At a Glance · What to Cite vs. What to Flag</div></div>
+    <table class="conf-table">
+      <thead>
+        <tr>
+          <th style="width:200px">Metric</th>
+          <th>Primary Source</th>
+          <th style="width:130px">Confidence</th>
+          <th>Safe to Use In Presentations?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="font-weight:800;color:var(--deep)">Big Mac Price & Index</td><td>The Economist, January 2026</td><td><span class="conf-pill" style="background:#EAF5E0;color:#2E6600">✅ HIGH</span></td><td>Yes — cite directly with source</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">GDP per Capita PPP</td><td>IMF WEO Oct 2025 + Jan 2026 Update</td><td><span class="conf-pill" style="background:#EAF5E0;color:#2E6600">✅ HIGH</span></td><td>Yes — cite directly with source</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">Real GDP Growth %</td><td>IMF WEO Oct 2025 + Jan 2026 Update</td><td><span class="conf-pill" style="background:#EAF5E0;color:#2E6600">✅ HIGH</span></td><td>Yes — note these are 2025 forecasts</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">CPI Inflation %</td><td>IMF WEO Oct 2025 + Jan 2026 Update</td><td><span class="conf-pill" style="background:#EAF5E0;color:#2E6600">✅ HIGH</span></td><td>Yes — cite directly with source</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">Population</td><td>UN WPP 2024</td><td><span class="conf-pill" style="background:#EAF5E0;color:#2E6600">✅ HIGH</span></td><td>Yes — cite directly with source</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">Urbanization Rate</td><td>UN WUP 2025</td><td><span class="conf-pill" style="background:#EAF5E0;color:#2E6600">✅ HIGH</span></td><td>Yes — cite directly with source</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">Median Age</td><td>UN WPP 2024</td><td><span class="conf-pill" style="background:#EAF5E0;color:#2E6600">✅ HIGH</span></td><td>Yes — cite directly with source</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">Private Consumption % GDP</td><td>World Bank 2023 actuals</td><td><span class="conf-pill" style="background:#EAF5E0;color:#2E6600">✅ HIGH</span></td><td>Yes — note it reflects 2023 actuals</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">Unemployment Rate</td><td>ILO ILOSTAT modelled estimates</td><td><span class="conf-pill" style="background:#EAF5E0;color:#2E6600">✅ HIGH</span></td><td>Yes — cite directly with source</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">Coca-Cola 2L Price</td><td>Numbeo / Expatistan crowdsourced</td><td><span class="conf-pill" style="background:#FFF3D0;color:#7A4800">⚠️ MEDIUM</span></td><td>Use as illustration — add "est." and note crowdsourced origin</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">E-Commerce Penetration</td><td>Multiple industry sources (estimated)</td><td><span class="conf-pill" style="background:#FDECEA;color:#B71C1C">🔴 ESTIMATE</span></td><td>Use as directional benchmark — add "estimated" and footnote</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">FMCG Market Signal</td><td>NielsenIQ analyst synthesis</td><td><span class="conf-pill" style="background:#F2F2F2;color:#555">QUALITATIVE</span></td><td>Internal framing only — not externally citable</td></tr>
+        <tr><td style="font-weight:800;color:var(--deep)">Key Consumer Insight</td><td>NielsenIQ analyst synthesis</td><td><span class="conf-pill" style="background:#F2F2F2;color:#555">QUALITATIVE</span></td><td>Internal framing only — not externally citable</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── RECOMMENDED FOOTNOTE ── -->
+    <div class="sec-head"><div class="sec-title">Recommended Footnote for Internal Sharing</div><div class="sec-line"></div><div class="sec-tag">Copy & Paste Ready</div></div>
+    <div style="background:var(--deep);padding:28px 32px;border-top:3px solid var(--blue);margin-bottom:24px">
+      <div style="font-size:9px;color:var(--blue);letter-spacing:2px;text-transform:uppercase;font-weight:800;margin-bottom:12px">RECOMMENDED FOOTNOTE — ADD TO ANY SLIDE OR DOCUMENT THAT USES THIS DATA</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.85;font-style:italic">
+        "Pricing data: The Economist Big Mac Index, January 2026 (economist.com/big-mac-index; data: github.com/TheEconomist/big-mac-data). Macro indicators (GDP per capita PPP, real GDP growth, CPI inflation, unemployment): IMF World Economic Outlook, October 2025, with revisions from IMF WEO Update, January 2026 (imf.org/en/publications/weo). Demographic data (population, median age): UN World Population Prospects 2024 (population.un.org/wpp). Urbanization rates: UN World Urbanization Prospects 2025 (population.un.org/wup). Private consumption as % of GDP: World Bank National Accounts, 2023 actuals (data.worldbank.org/indicator/NE.CON.PRVT.ZS). E-commerce penetration figures represent FMCG grocery retail estimates based on Euromonitor, eMarketer, and regional industry association data (2025–2026); directional benchmarks only — cross-market comparisons should not be treated as precise measurements. Coca-Cola 2L prices: Numbeo and Expatistan cost-of-living databases (2025–2026 estimates; crowdsourced, ±15–20% margin). FMCG Market Signals and Consumer Insights: NielsenIQ analytics team synthesis; not a published classification system. Dashboard compiled and updated: March 2026."
+      </div>
+    </div>
+
+    <!-- ── BUILT BY ── -->
+    <div style="background:var(--card);border:1px solid var(--border);padding:24px;display:flex;align-items:center;gap:20px;margin-bottom:0">
+      <div style="width:44px;height:44px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;border-radius:3px;flex-shrink:0">NiQ</div>
+      <div>
+        <div style="font-size:13px;font-weight:900;color:var(--deep)">NielsenIQ Analytics Intelligence · APAC</div>
+        <div style="font-size:11px;color:var(--gray);margin-top:2px;line-height:1.6">Built for internal team use · Global FMCG Macro Dashboard · Updated March 2026 · 42 markets · 5 regions · 11 indicators. Questions about methodology or data validation: contact the Analytics Intelligence team. For proprietary NIQ measurement data on specific markets, reach out via NIQ Connect.</div>
+      </div>
+    </div>
+
+  </div><!-- /wrap -->
+</div><!-- /pg-about -->
+
+<footer class="ftr">
+  <div class="ftr-l"><strong style="color:rgba(255,255,255,.4)">NielsenIQ Intelligence Platform</strong> · Global FMCG Macro Dashboard · Updated March 2026<br>Sources: The Economist Jan 2026 · IMF WEO Oct 2025 + Jan 2026 Update · World Bank · UN WPP 2024 · UN WUP 2025 · Numbeo · Euromonitor</div>
+  <div class="ftr-r">Confidential · Internal Use Only</div>
+</footer>
+
+<script>
+// ── DATA ──
+const D=[
+  {r:'US',c:'United States',f:'🇺🇸',p:341,g:89599,bm:6.12,bi:0,ck:2.89,inf:2.7,pc:68,u:83,gr:2.0,un:4.2,a:38.5,ec:31,sig:'Mature / Premium',ins:'AI & tech investment boom driving growth; premiumization and health-conscious shifts; private label gaining on national brands.'},
+  {r:'US',c:'Canada',f:'🇨🇦',p:41,g:65500,bm:5.54,bi:-9.5,ck:2.59,inf:2.1,pc:58,u:82,gr:1.5,un:6.4,a:41.8,ec:28,sig:'Mature / Stable',ins:'Immigration-driven diversity reshaping basket. Discount retailers (No Frills, Dollarama) expanding rapidly.'},
+  {r:'WE',c:'Germany',f:'🇩🇪',p:84,g:73553,bm:7.05,bi:15.2,ck:2.09,inf:2.1,pc:52,u:78,gr:0.2,un:3.5,a:44.8,ec:29,sig:'Mature / Stagnant',ins:'0.2% growth — weakest major EU economy. Aldi/Lidl dominate; private label share >40%. Defense spending pivot could unlock consumer confidence.'},
+  {r:'WE',c:'United Kingdom',f:'🇬🇧',p:68,g:63759,bm:7.08,bi:15.7,ck:2.59,inf:2.8,pc:63,u:84,gr:1.3,un:4.3,a:40.6,ec:33,sig:'Recovering / Premium',ins:'UK Big Mac now $7.08 — 16% above US. Cost-of-living easing but Tesco/Sainsbury price wars intensifying. Quick-commerce dominant.'},
+  {r:'WE',c:'France',f:'🇫🇷',p:66,g:66061,bm:7.05,bi:15.2,ck:2.29,inf:0.9,pc:53,u:82,gr:0.7,un:7.5,a:42.3,ec:25,sig:'Mature / Premium',ins:'Lowest inflation in WE at 0.9%. Carrefour/Leclerc dominant. Quality and provenance remain key purchase drivers.'},
+  {r:'WE',c:'Spain',f:'🇪🇸',p:48,g:56888,bm:7.05,bi:15.2,ck:1.89,inf:2.3,pc:57,u:81,gr:2.9,un:11.2,a:45.3,ec:22,sig:'WE Outperformer',ins:'Spain growing fastest in WE at 2.9%. Mercadona own-label supremacy. Tourism HORECA recovery accelerating FMCG demand.'},
+  {r:'WE',c:'Italy',f:'🇮🇹',p:59,g:63126,bm:7.05,bi:15.2,ck:2.09,inf:1.2,pc:60,u:72,gr:0.7,un:6.9,a:48.4,ec:20,sig:'Mature / Slow',ins:'Aging population reshaping basket toward health. Conad and Coop expanding; traditional trade still strong.'},
+  {r:'WE',c:'Switzerland',f:'🇨🇭',p:9,g:97659,bm:9.08,bi:48.4,ck:3.69,inf:0.4,pc:51,u:74,gr:1.3,un:2.5,a:43.1,ec:24,sig:'Premium Niche',ins:'World\'s most expensive Big Mac at $9.08 — up sharply from Jan 2025. Migros/Coop duopoly. Highest absolute pricing floor for FMCG in dataset.'},
+  {r:'WE',c:'Netherlands',f:'🇳🇱',p:18,g:84035,bm:7.05,bi:15.2,ck:2.39,inf:2.5,pc:44,u:93,gr:1.0,un:3.8,a:42.8,ec:30,sig:'Mature / Digital',ins:'Albert Heijn dominant; highest WE e-commerce. FMCG HQ hub (Unilever, Heineken). GDP per capita $84K — top 15 globally.'},
+  {r:'WE',c:'Sweden',f:'🇸🇪',p:11,g:73070,bm:7.26,bi:18.6,ck:2.69,inf:1.4,pc:46,u:89,gr:1.8,un:8.3,a:41,ec:27,sig:'Mature / Sustainable',ins:'Krona strengthening — Big Mac now $7.26, 19% above US. ICA/Axfood lead; sustainability as purchase criterion. Cashless society.'},
+  {r:'EEMEA',c:'Poland',f:'🇵🇱',p:38,g:51060,bm:6.25,bi:2.0,ck:1.69,inf:3.8,pc:51,u:60,gr:3.1,un:2.9,a:42.5,ec:18,sig:'High Growth',ins:'Big Mac now $6.25 — nearly at US parity. EU fastest-growing large market. Biedronka dominant; modern trade revolution underway.'},
+  {r:'EEMEA',c:'Turkey',f:'🇹🇷',p:86,g:43786,bm:5.9,bi:-3.6,ck:1.39,inf:24.7,pc:59,u:77,gr:3.0,un:9.4,a:32.2,ec:17,sig:'Inflation Distorted',ins:'Inflation at 24.7% — lira weakness inflating dollar-converted BM to $5.90. Downtrading structural; local brands outperform multinationals.'},
+  {r:'EEMEA',c:'Saudi Arabia',f:'🇸🇦',p:37,g:71538,bm:5.07,bi:-17.2,ck:1.59,inf:1.8,pc:42,u:85,gr:3.8,un:4.7,a:32.4,ec:15,sig:'Expanding Modern',ins:'Vision 2030 driving retail modernization. Saudi GDP PPP now $71.5K — strong consumer spending power. Female workforce growing rapidly.'},
+  {r:'EEMEA',c:'UAE',f:'🇦🇪',p:10,g:99526,bm:5.17,bi:-15.5,ck:1.79,inf:2.1,pc:35,u:87,gr:5.0,un:2.8,a:33.5,ec:22,sig:'Premium / High Growth',ins:'UAE growing 5.0% — fastest in EEMEA. GDP PPP nearly $100K. Noon and Carrefour UAE leading digital commerce.'},
+  {r:'EEMEA',c:'South Africa',f:'🇿🇦',p:63,g:17250,bm:3.36,bi:-45.1,ck:1.19,inf:3.5,pc:62,u:69,gr:1.1,un:32.8,a:28.1,ec:12,sig:'Dual Economy',ins:'Rand weakness deepens — BM now $3.36. Shoprite/Pick n Pay dominant. Extreme inequality splits market; sachet economy critical for mass volume.'},
+  {r:'EEMEA',c:'Egypt',f:'🇪🇬',p:107,g:17350,bm:2.65,bi:-56.7,ck:0.89,inf:13.5,pc:82,u:43,gr:4.1,un:7.1,a:24.1,ec:9,sig:'Volume Growth',ins:'Inflation declining from 2024 peak — still 13.5%. Young population + rapid urbanization = FMCG volume engine. Post-devaluation basket compression easing.'},
+  {r:'EEMEA',c:'Nigeria',f:'🇳🇬',p:230,g:6420,bm:3.42,bi:-44.1,ck:0.79,inf:17.0,pc:74,u:55,gr:4.2,un:5.0,a:18.1,ec:8,sig:'Frontier / High Potential',ins:'Nigeria GDP rebased — 40.8% upward revision in 2025. Inflation declining from peak. Africa\'s largest consumer base. Sachet economy thriving.'},
+  {r:'EEMEA',c:'Czech Republic',f:'🇨🇿',p:11,g:57640,bm:5.5,bi:-10.1,ck:1.59,inf:2.0,pc:47,u:74,gr:2.0,un:2.7,a:43.3,ec:20,sig:'Converging',ins:'EU convergence maturing. Kaufland/Lidl/Albert expanding. GDP PPP at $57.6K — approaching WE levels.'},
+  {r:'EEMEA',c:'Romania',f:'🇷🇴',p:19,g:46820,bm:3.98,bi:-35.0,ck:1.19,inf:4.5,pc:63,u:55,gr:2.5,un:5.5,a:43.6,ec:14,sig:'Fast Modernizing',ins:'Kaufland/Lidl/Carrefour driving modern trade revolution. GDP PPP growing fast. Traditional market share declining 3–4% annually.'},
+  {r:'EEMEA',c:'Kenya',f:'🇰🇪',p:56,g:7200,bm:3.35,bi:-45.3,ck:0.69,inf:4.8,pc:73,u:29,gr:4.8,un:12.7,a:20.1,ec:6,sig:'Frontier / Mobile',ins:'M-Pesa mobile money enables digital FMCG. Naivas & Carrefour expanding. 4.8% GDP growth — strong frontier momentum.'},
+  {r:'EEMEA',c:'Pakistan',f:'🇵🇰',p:240,g:8052,bm:3.86,bi:-36.9,ck:0.59,inf:7.0,pc:80,u:38,gr:3.2,un:6.5,a:22,ec:5,sig:'Large Informal',ins:'Inflation falling sharply from 2024 crisis levels. 6th largest population. 90%+ informal retail. Q-commerce emerging in Karachi and Lahore.'},
+  {r:'APAC',c:'China',f:'🇨🇳',p:1412,g:27388,bm:3.66,bi:-40.2,ck:1.29,inf:0.2,pc:39,u:67,gr:5.0,un:5.2,a:39.5,ec:42,sig:'Deflationary + Digital',ins:'China delivered 5.0% growth in 2025 — above expectations. Deflation easing (0.2% CPI). Pinduoduo and Sam\'s Club reshaping FMCG value architecture.'},
+  {r:'APAC',c:'Japan',f:'🇯🇵',p:124,g:54815,bm:3.03,bi:-50.5,ck:1.99,inf:2.7,pc:53,u:92,gr:1.1,un:2.5,a:49.1,ec:27,sig:'Mature / Aging',ins:'Yen weakness keeps BM at $3.03 despite $55K GDP PPP. Super-aged society. Konbini are the FMCG lifeline for aging consumers shopping daily in small formats.'},
+  {r:'APAC',c:'India',f:'🇮🇳',p:1442,g:11860,bm:2.51,bi:-59.0,ck:0.69,inf:3.8,pc:61,u:36,gr:7.3,un:7.8,a:28.4,ec:14,sig:'High Growth Engine',ins:'India grew 7.3% in 2025 — IMF upgraded by 0.7pp. World\'s fastest major economy. Blinkit/Zepto quick-commerce rewriting FMCG last-mile playbook.'},
+  {r:'APAC',c:'Indonesia',f:'🇮🇩',p:280,g:17550,bm:2.52,bi:-58.8,ck:0.79,inf:2.1,pc:55,u:59,gr:4.9,un:5.1,a:30.3,ec:16,sig:'Emerging Powerhouse',ins:'4.9% growth — stable. Warung still dominant but Tokopedia/Shopee driving digital FMCG. Young demographics fueling snacking category growth.'},
+  {r:'APAC',c:'South Korea',f:'🇰🇷',p:52,g:60090,bm:3.74,bi:-38.9,ck:2.29,inf:1.5,pc:48,u:82,gr:1.2,un:3.7,a:44.9,ec:36,sig:'Mature / Digital',ins:'Won weakness — BM at $3.74. World-leading e-commerce (36%). Coupang same-day delivery is the consumer baseline. K-beauty and health exporting globally.'},
+  {r:'APAC',c:'Australia',f:'🇦🇺',p:27,g:71431,bm:5.69,bi:-7.0,ck:2.99,inf:2.7,pc:51,u:87,gr:2.1,un:4.1,a:37.9,ec:32,sig:'Mature / Premium',ins:'Growing 2.1% — above WE peers. Woolworths/Coles duopoly controls 65%+. Aldi disrupting with private label. GDP PPP $71K — strong premium headroom.'},
+  {r:'APAC',c:'Thailand',f:'🇹🇭',p:72,g:24930,bm:4.3,bi:-29.7,ck:1.09,inf:0.8,pc:52,u:53,gr:1.6,un:1.1,a:40.1,ec:20,sig:'Slowing Growth',ins:'Thailand growth revised down to 1.6% — tourism lag and trade headwinds. 7-Eleven 14K+ stores anchors convenience channel. Lowest inflation in APAC at 0.8%.'},
+  {r:'APAC',c:'Vietnam',f:'🇻🇳',p:100,g:16050,bm:2.89,bi:-52.8,ck:0.79,inf:3.2,pc:65,u:39,gr:6.5,un:2.3,a:32.5,ec:19,sig:'Fast Growth Frontier',ins:'Vietnam 6.5% growth. Bach Hoa Xanh (3K+ stores) and Winmart compressing urbanization-to-modern-trade curve. TikTok Shop social commerce surging.'},
+  {r:'APAC',c:'Singapore',f:'🇸🇬',p:6,g:161546,bm:5.78,bi:-5.5,ck:2.59,inf:1.8,pc:33,u:100,gr:1.8,un:2.0,a:42.2,ec:35,sig:'Premium City-State',ins:'Singapore GDP PPP now $161K — highest in dataset. FairPrice, GrabMart and Shopee form complete FMCG digital ecosystem. Premium imported brands thrive.'},
+  {r:'APAC',c:'Philippines',f:'🇵🇭',p:118,g:12180,bm:2.84,bi:-53.6,ck:0.69,inf:2.8,pc:74,u:48,gr:5.8,un:3.9,a:25.7,ec:12,sig:'Young & Growing',ins:'Philippines 5.8% growth — consistently strong. Youngest major APAC market (25 yrs). SM/Robinsons expanding modern trade. Sari-sari stores still 60%+ of FMCG volume.'},
+  {r:'APAC',c:'Malaysia',f:'🇲🇾',p:34,g:40870,bm:3.39,bi:-44.6,ck:0.89,inf:1.8,pc:58,u:79,gr:4.0,un:3.4,a:30.3,ec:22,sig:'Emerging Modern',ins:'99 Speedmart aggressive expansion. Halal as FMCG competitive advantage. GDP PPP $41K — middle-income transition accelerating.'},
+  {r:'APAC',c:'Taiwan',f:'🇹🇼',p:24,g:84760,bm:2.47,bi:-59.6,ck:1.69,inf:1.4,pc:52,u:80,gr:3.3,un:3.5,a:43.3,ec:30,sig:'Undervalued / Tech',ins:'Taiwan BM ($2.47) is world\'s cheapest — -60% vs US despite $85K GDP PPP. Semiconductor boom driving income growth. Massive premium FMCG headroom.'},
+  {r:'LATAM',c:'Brazil',f:'🇧🇷',p:217,g:21850,bm:4.45,bi:-27.3,ck:1.79,inf:4.8,pc:63,u:88,gr:2.0,un:7.6,a:34.3,ec:16,sig:'Recovering / Volume',ins:'Atacadão/Assaí cash-and-carry transforming retail. 2.0% growth — inflation stabilizing supports volume recovery. Mercado Livre digital FMCG expanding.'},
+  {r:'LATAM',c:'Mexico',f:'🇲🇽',p:131,g:26080,bm:6.17,bi:0.8,ck:1.29,inf:3.7,pc:66,u:81,gr:1.2,un:2.7,a:29.3,ec:14,sig:'Stable / Strategic',ins:'Mexico BM $6.17 — now above US baseline. Highest per-capita Coke consumption globally. OXXO 22K+ stores dominant FMCG last-mile. Nearshoring expanding middle class.'},
+  {r:'LATAM',c:'Argentina',f:'🇦🇷',p:46,g:25890,bm:5.53,bi:-9.6,ck:1.89,inf:16.4,pc:70,u:92,gr:4.0,un:7.7,a:32.4,ec:15,sig:'Recovery / Inflation',ins:'Argentina turnaround — 4.0% growth vs -1.5% in 2024. Milei reforms cut inflation from 60% to 16.4%. Private label still dominant. BM $5.53 reflects peso stabilization.'},
+  {r:'LATAM',c:'Colombia',f:'🇨🇴',p:53,g:22150,bm:6.21,bi:1.5,ck:1.09,inf:4.0,pc:68,u:82,gr:2.3,un:10.5,a:31.8,ec:13,sig:'Emerging Growth',ins:'Colombia BM $6.21 — above US baseline. D1/ARA hard discount grew from 0 to 40%+ in 10 years. Rappi super-app reshaping FMCG route-to-market.'},
+  {r:'LATAM',c:'Chile',f:'🇨🇱',p:20,g:31720,bm:5.42,bi:-11.4,ck:1.89,inf:3.2,pc:64,u:88,gr:2.0,un:8.2,a:36.8,ec:18,sig:'Stable / Modern',ins:'Highest modern trade penetration in LATAM. Cencosud/Falabella premium positioning. Cornershop/Uber Eats driving digital FMCG in Santiago.'},
+  {r:'LATAM',c:'Peru',f:'🇵🇪',p:34,g:17290,bm:5.03,bi:-17.8,ck:0.99,inf:2.1,pc:66,u:79,gr:2.7,un:6.1,a:31.5,ec:11,sig:'Steady / Traditional',ins:'Bodegas serve 70%+ of grocery. Low inflation (2.1%) and steady growth. Modern retail expanding in Lima.'},
+  {r:'LATAM',c:'Uruguay',f:'🇺🇾',p:4,g:31850,bm:8.76,bi:43.1,ck:2.29,inf:4.8,pc:66,u:96,gr:3.0,un:7.8,a:36.1,ec:12,sig:'Premium LATAM',ins:'Uruguay BM $8.76 — second most expensive in world. Strong peso and stable welfare economy. Small but high-income consumer base.'},
+  {r:'LATAM',c:'Costa Rica',f:'🇨🇷',p:5,g:28040,bm:6.04,bi:-1.3,ck:1.59,inf:1.0,pc:64,u:82,gr:3.9,un:8.9,a:34.3,ec:10,sig:'Stable Growth',ins:'Lowest inflation in LATAM at 1.0%. Big Mac $6.04 — just below US. Strong middle class. Eco-tourism and tech services driving premium food demand.'},
+  {r:'LATAM',c:'Guatemala',f:'🇬🇹',p:18,g:12080,bm:4.3,bi:-29.7,ck:0.79,inf:3.4,pc:82,u:53,gr:3.5,un:2.5,a:23.2,ec:5,sig:'Traditional / Informal',ins:'Central America\'s largest economy. 80%+ informal retail (tiendas). Highest private consumption/GDP ratio in dataset at 82%. Remittances drive consumer spending.'}
+];
+
+const C={blue:'#2D6DF6',deep:'#060A45',lblue:'#31D1FF',orange:'#EF5F17',green:'#59AD00',pink:'#EF5890',yellow:'#FFB500',gray:'#999'};
+const RC={US:C.blue,WE:C.green,EEMEA:C.orange,APAC:C.lblue,LATAM:C.pink};
+const RL={US:'Americas',WE:'W. Europe',EEMEA:'EEMEA',APAC:'Asia-Pacific',LATAM:'Latin America'};
+
+Chart.defaults.font.family='Arial,sans-serif';
+Chart.defaults.color='#666';
+
+// ── NAVIGATION ──
+function goPage(n,el){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pg-'+n).classList.add('on');
+  el.classList.add('on');
+  if(n==='explorer'&&!window._tblBuilt){buildTable();window._tblBuilt=true;}
+  if(n==='signals'&&!window._sigBuilt){setTimeout(buildSignalCharts,80);window._sigBuilt=true;}
+  window.scrollTo(0,0);
+}
+
+// ── CHART: Big Mac ──
+const bmS=[...D].sort((a,b)=>b.bm-a.bm);
+new Chart(document.getElementById('bigmacChart'),{
+  type:'bar',
+  data:{labels:bmS.map(d=>d.f+' '+d.c.split(' ').pop()),datasets:[{data:bmS.map(d=>d.bm),backgroundColor:bmS.map(d=>d.inf>20?C.orange+'CC':d.bm>5.79?C.blue:d.bm>4?C.blue+'77':'#BCC8E0'),borderWidth:0,borderRadius:2}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const d=bmS[ctx.dataIndex];return['$'+d.bm+' · BM Index: '+(d.bi>0?'+':'')+d.bi+'%','Region: '+RL[d.r],'Signal: '+d.sig];}}}},scales:{x:{ticks:{font:{size:8},maxRotation:50,color:'#666'},grid:{display:false}},y:{ticks:{callback:v=>'$'+v,font:{size:9}},grid:{color:'#F0F2F8'}}}}
+});
+
+// ── CHART: E-Commerce ──
+const ecS=[...D].sort((a,b)=>b.ec-a.ec).slice(0,18);
+new Chart(document.getElementById('ecommChart'),{
+  type:'bar',
+  data:{labels:ecS.map(d=>d.f+' '+d.c.split(' ')[0]),datasets:[{data:ecS.map(d=>d.ec),backgroundColor:ecS.map(d=>{const pc=d.ec/42;const r=Math.round(45+pc*21),g=Math.round(109+pc*28),b=Math.round(246-pc*100);return`rgba(${r},${g},${b},0.85)`}),borderWidth:0,borderRadius:2}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ecS[ctx.dataIndex].ec}% of FMCG retail · ${RL[ecS[ctx.dataIndex].r]}`}}},scales:{x:{ticks:{callback:v=>v+'%',font:{size:9}},grid:{color:'#F0F2F8'},max:50},y:{ticks:{font:{size:10}},grid:{display:false}}}}
+});
+
+// ── CHART: Bubble ──
+const bDS=['US','WE','EEMEA','APAC','LATAM'].map(r=>({label:RL[r],data:D.filter(d=>d.r===r).map(d=>({x:d.g/1000,y:d.inf,r:Math.max(4,Math.sqrt(d.p)*.9),country:d.c,flag:d.f,pop:d.p})),backgroundColor:RC[r]+'40',borderColor:RC[r],borderWidth:1.5}));
+new Chart(document.getElementById('bubbleChart'),{
+  type:'bubble',data:{datasets:bDS},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:8,padding:12}},tooltip:{callbacks:{label:ctx=>{const d=ctx.raw;return[d.flag+' '+d.country,'GDP PPP: $'+d.x.toFixed(0)+'K','Inflation: '+d.y+'%','Pop: '+d.pop+'M'];}}}},scales:{x:{title:{display:true,text:'GDP per Capita PPP ($000)',font:{size:10}},ticks:{callback:v=>'$'+v+'K',font:{size:9}},grid:{color:'#F5F6FC'}},y:{title:{display:true,text:'Inflation Rate (%)',font:{size:10}},ticks:{callback:v=>v+'%',font:{size:9}},grid:{color:'#F5F6FC'}}}}
+});
+
+// ── CHART: Inflation ──
+const infS=[...D].sort((a,b)=>b.inf-a.inf).slice(0,20);
+new Chart(document.getElementById('inflationChart'),{
+  type:'bar',
+  data:{labels:infS.map(d=>d.f+' '+d.c.split(' ')[0]),datasets:[{data:infS.map(d=>d.inf),backgroundColor:infS.map(d=>d.inf>20?C.orange:d.inf>7?C.yellow:d.inf>3?C.blue+'88':'#BCC8E0'),borderWidth:0,borderRadius:2}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>infS[ctx.dataIndex].inf+'% annual CPI'}}},scales:{x:{ticks:{callback:v=>v+'%',font:{size:9}},grid:{color:'#F0F2F8'}},y:{ticks:{font:{size:10}},grid:{display:false}}}}
+});
+
+// ── CHART: Coke vs Big Mac ──
+const ckC=['India','China','United States','Indonesia','Japan','Philippines','Vietnam','Mexico','Brazil','Egypt','South Africa','Germany','United Kingdom','Turkey','Thailand','Australia','Switzerland','Italy'];
+const ckD=ckC.map(c=>D.find(d=>d.c===c)).filter(Boolean);
+new Chart(document.getElementById('cokeChart'),{
+  type:'bar',
+  data:{labels:ckD.map(d=>d.f+' '+d.c.split(' ').pop()),datasets:[{label:'Big Mac ($)',data:ckD.map(d=>d.bm),backgroundColor:C.deep+'CC',borderWidth:0,borderRadius:2},{label:'Coca-Cola 2L ($)',data:ckD.map(d=>d.ck),backgroundColor:C.blue+'BB',borderWidth:0,borderRadius:2}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:10,padding:8}}},scales:{x:{ticks:{font:{size:8},maxRotation:45},grid:{display:false}},y:{ticks:{callback:v=>'$'+v,font:{size:9}},grid:{color:'#F0F2F8'}}}}
+});
+
+// ── CHART: Urban Mini ──
+const urTop=[...D].sort((a,b)=>b.ec-a.ec).slice(0,12);
+new Chart(document.getElementById('urbanMiniChart'),{
+  type:'bubble',
+  data:{datasets:[{label:'Markets',data:D.map(d=>({x:d.u,y:d.ec,r:Math.max(3,d.g/12000),country:d.c,flag:d.f})),backgroundColor:D.map(d=>RC[d.r]+'55'),borderColor:D.map(d=>RC[d.r]),borderWidth:1}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const d=ctx.raw;return[d.flag+' '+d.country,'Urban: '+d.x+'%','E-Comm: '+d.y+'%'];}}}},scales:{x:{title:{display:true,text:'Urbanization %',font:{size:9}},ticks:{callback:v=>v+'%',font:{size:9}},grid:{color:'#F5F6FC'}},y:{title:{display:true,text:'E-Commerce %',font:{size:9}},ticks:{callback:v=>v+'%',font:{size:9}},grid:{color:'#F5F6FC'}}}}
+});
+
+// ── HEATMAP ──
+const HM_COLS=['E-Comm %','GDP PPP','GDP Growth','Pvt Cons %','Urban %','Big Mac'];
+const TOP20=D.slice().sort((a,b)=>b.g-a.g).slice(0,20);
+function hmColor(val,min,max,alpha=0.85){const t=(val-min)/(max-min);const r=Math.round(45+t*18),g=Math.round(109+t*30),b=Math.round(246-t*80);return`rgba(${r},${g},${b},${alpha})`;}
+function hmColorRev(val,min,max){const t=(val-min)/(max-min);const r=Math.round(239-t*0),g=Math.round(95+t*78),b=Math.round(23+t*28);return`rgba(${r},${g},${b},0.8)`;}
+function buildHeatmap(){
+  const t=document.getElementById('heatmapTable');
+  const vals={ec:D.map(d=>d.ec),g:D.map(d=>d.g),gr:D.map(d=>d.gr),pc:D.map(d=>d.pc),u:D.map(d=>d.u),bm:D.map(d=>d.bm)};
+  const mx=k=>Math.max(...vals[k]),mn=k=>Math.min(...vals[k]);
+  let html=`<tr><th>Market</th><th>E-Comm %</th><th>GDP PPP</th><th>GDP Growth</th><th>Pvt Cons %</th><th>Urban %</th><th>Big Mac $</th></tr>`;
+  TOP20.forEach(d=>{
+    html+=`<tr>
+      <td><span class="rtag r-${d.r}">${d.r}</span> ${d.f} ${d.c}</td>
+      <td style="background:${hmColor(d.ec,mn('ec'),mx('ec'))};color:${d.ec>25?'#fff':'#000'}">${d.ec}%</td>
+      <td style="background:${hmColor(d.g,mn('g'),mx('g'))};color:${d.g>50000?'#fff':'#000'}">$${(d.g/1000).toFixed(0)}K</td>
+      <td style="background:${d.gr>0?hmColor(d.gr,0,7):hmColorRev(Math.abs(d.gr),0,2)};color:${d.gr>3||d.gr<0?'#fff':'#000'}">${d.gr>0?'+':''}${d.gr}%</td>
+      <td style="background:${hmColor(d.pc,mn('pc'),mx('pc'))};color:${d.pc>65?'#fff':'#000'}">${d.pc}%</td>
+      <td style="background:${hmColor(d.u,mn('u'),mx('u'))};color:${d.u>75?'#fff':'#000'}">${d.u}%</td>
+      <td style="background:${hmColor(d.bm,mn('bm'),mx('bm'))};color:${d.bm>5?'#fff':'#000'}">$${d.bm}</td>
+    </tr>`;
+  });
+  t.innerHTML=html;
+}
+buildHeatmap();
+
+// ── SIGNAL CHARTS (lazy) ──
+function buildSignalCharts(){
+  // Age chart
+  const aS=[...D].sort((a,b)=>a.a-b.a).slice(0,20);
+  new Chart(document.getElementById('ageChart'),{
+    type:'bar',
+    data:{labels:aS.map(d=>d.f+' '+d.c.split(' ')[0]),datasets:[{data:aS.map(d=>d.a),backgroundColor:aS.map(d=>d.a<28?C.orange:d.a<40?C.yellow:C.blue+'88'),borderWidth:0,borderRadius:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`Median age: ${aS[ctx.dataIndex].a} · ${aS[ctx.dataIndex].sig}`}}},scales:{x:{ticks:{font:{size:8},maxRotation:50},grid:{display:false}},y:{ticks:{font:{size:9}},grid:{color:'#F5F6FC'}}}}
+  });
+  // Growth vs E-Comm scatter
+  new Chart(document.getElementById('growthEcommChart'),{
+    type:'bubble',
+    data:{datasets:['US','WE','EEMEA','APAC','LATAM'].map(r=>({label:RL[r],data:D.filter(d=>d.r===r).map(d=>({x:d.ec,y:d.gr,r:Math.max(4,Math.sqrt(d.p)*.9),country:d.c,flag:d.f})),backgroundColor:RC[r]+'44',borderColor:RC[r],borderWidth:1.5}))},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:8,padding:10}},tooltip:{callbacks:{label:ctx=>{const d=ctx.raw;return[d.flag+' '+d.country,'E-Comm: '+d.x+'%','GDP Growth: '+d.y+'%'];}}}},scales:{x:{title:{display:true,text:'E-Commerce %',font:{size:10}},ticks:{callback:v=>v+'%',font:{size:9}},grid:{color:'#F5F6FC'}},y:{title:{display:true,text:'Real GDP Growth %',font:{size:10}},ticks:{callback:v=>v+'%',font:{size:9}},grid:{color:'#F5F6FC'}}}}
+  });
+  // Consumption
+  const csS=[...D].sort((a,b)=>b.pc-a.pc).slice(0,15);
+  new Chart(document.getElementById('consumptionChart'),{
+    type:'bar',
+    data:{labels:csS.map(d=>d.f+' '+d.c.split(' ')[0]),datasets:[{data:csS.map(d=>d.pc),backgroundColor:csS.map(d=>RC[d.r]+'BB'),borderWidth:0,borderRadius:2}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${csS[ctx.dataIndex].pc}% of GDP · ${RL[csS[ctx.dataIndex].r]}`}}},scales:{x:{ticks:{callback:v=>v+'%',font:{size:9}},grid:{color:'#F5F6FC'},max:90},y:{ticks:{font:{size:9}},grid:{display:false}}}}
+  });
+  // GDP PPP
+  const pS=[...D].sort((a,b)=>b.g-a.g);
+  new Chart(document.getElementById('gdpPPPChart'),{
+    type:'bar',
+    data:{labels:pS.map(d=>d.f+' '+d.c.split(' ').pop()),datasets:[{data:pS.map(d=>d.g),backgroundColor:pS.map(d=>RC[d.r]+'CC'),borderWidth:0,borderRadius:1}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+pS[ctx.dataIndex].g.toLocaleString()+' · '+RL[pS[ctx.dataIndex].r]}}},scales:{x:{ticks:{font:{size:8},maxRotation:50},grid:{display:false}},y:{ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K',font:{size:9}},grid:{color:'#F5F6FC'}}}}
+  });
+  // Urban full
+  new Chart(document.getElementById('urbanFullChart'),{
+    type:'bubble',
+    data:{datasets:['US','WE','EEMEA','APAC','LATAM'].map(r=>({label:RL[r],data:D.filter(d=>d.r===r).map(d=>({x:d.u,y:d.ec,r:Math.max(3,d.g/10000),country:d.c,flag:d.f,gdp:d.g})),backgroundColor:RC[r]+'44',borderColor:RC[r],borderWidth:1.5}))},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:8,padding:12}},tooltip:{callbacks:{label:ctx=>{const d=ctx.raw;return[d.flag+' '+d.country,'Urban: '+d.x+'%','E-Comm: '+d.y+'%','GDP PPP: $'+d.gdp.toLocaleString()];}}}},scales:{x:{title:{display:true,text:'Urbanization Rate (%)',font:{size:11}},ticks:{callback:v=>v+'%',font:{size:9}},grid:{color:'#F5F6FC'}},y:{title:{display:true,text:'E-Commerce FMCG %',font:{size:11}},ticks:{callback:v=>v+'%',font:{size:9}},grid:{color:'#F5F6FC'}}}}
+  });
+}
+
+// ── TABLE ──
+let sCol=-1,sDir=1;
+function sigClass(s){
+  if(!s)return'signal-mature';const l=s.toLowerCase();
+  if(l.includes('high')||l.includes('engine'))return'stag" style="background:#E8F5D8;color:#2E6600';
+  if(l.includes('frontier')||l.includes('ravaged'))return'stag" style="background:#FDECEA;color:#B71C1C';
+  if(l.includes('inflation')||l.includes('distorted'))return'stag" style="background:#FFF3CC;color:#7A4800';
+  if(l.includes('premium')||l.includes('city'))return'stag" style="background:#EEF3FF;color:#2D6DF6';
+  if(l.includes('emerging')||l.includes('fast')||l.includes('converging'))return'stag" style="background:#E2F4FD;color:#006A99';
+  return'stag" style="background:#F2F2F2;color:#555';
+}
+function buildTable(){
+  const s=(document.getElementById('searchInput').value||'').toLowerCase();
+  const rf=document.getElementById('regionFilter').value;
+  const sf=document.getElementById('signalFilter').value;
+  let f=D.filter(d=>{
+    const ms=!s||d.c.toLowerCase().includes(s)||d.sig.toLowerCase().includes(s);
+    const mr=!rf||d.r===rf;
+    const msig=!sf||d.sig.includes(sf);
+    return ms&&mr&&msig;
+  });
+  if(sCol>=0){
+    const K=['r','c','p','g','bm','bi','ck','inf','pc','u','gr','un','a','ec','sig','ins'];
+    f.sort((a,b)=>(typeof a[K[sCol]]==='number'?a[K[sCol]]-b[K[sCol]]:String(a[K[sCol]]).localeCompare(String(b[K[sCol]])))*sDir);
+  }
+  document.getElementById('tblCount').textContent=f.length+' market'+(f.length!==1?'s':'');
+  const mBM=Math.max(...D.map(d=>d.bm)),mEC=Math.max(...D.map(d=>d.ec));
+  document.getElementById('tblBody').innerHTML=f.map(d=>`
+    <tr>
+      <td><span class="rtag r-${d.r}">${d.r}</span></td>
+      <td style="font-weight:800;white-space:nowrap">${d.f} ${d.c}</td>
+      <td>${d.p.toLocaleString()}</td>
+      <td>$${d.g.toLocaleString()}</td>
+      <td><div class="bc"><div class="mb" style="width:${(d.bm/mBM*70).toFixed(0)}px;background:var(--blue)"></div><span class="bv">$${d.bm}</span></div></td>
+      <td style="color:${d.bi>0?C.green:C.orange};font-weight:800">${d.bi>0?'+':''}${d.bi}%</td>
+      <td>$${d.ck}</td>
+      <td style="color:${d.inf>20?C.orange:d.inf>7?C.yellow:'inherit'};font-weight:${d.inf>7?800:400}">${d.inf}%</td>
+      <td>${d.pc}%</td>
+      <td>${d.u}%</td>
+      <td style="color:${d.gr>4?C.green:d.gr<0?C.orange:'inherit'};font-weight:${Math.abs(d.gr)>3?800:400}">${d.gr}%</td>
+      <td style="color:${d.un>15?C.orange:'inherit'}">${d.un.toFixed(1)}%</td>
+      <td>${d.a}</td>
+      <td><div class="bc"><div class="mb" style="width:${(d.ec/mEC*65).toFixed(0)}px;background:var(--deep)"></div><span class="bv" style="color:var(--deep)">${d.ec}%</span></div></td>
+      <td><span class="${sigClass(d.sig)}">${d.sig}</span></td>
+      <td style="font-size:10px;color:var(--gray);max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer" title="${d.ins}">${d.ins}</td>
+    </tr>`).join('');
+}
+
+// ── SLIDES ──
+let cs=1;const TS=8;
+function buildDots(){
+  const c=document.getElementById('sdots');c.innerHTML='';
+  for(let i=1;i<=TS;i++){const d=document.createElement('div');d.className='sdot'+(i===cs?' on':'');d.onclick=()=>goSl(i);c.appendChild(d);}
+  document.getElementById('scount').textContent=cs+' / '+TS;
+}
+function goSl(n){document.getElementById('sl-'+cs).classList.remove('on');cs=n;document.getElementById('sl-'+cs).classList.add('on');buildDots();}
+function gSlide(d){let n=cs+d;if(n<1)n=TS;if(n>TS)n=1;goSl(n);}
+document.addEventListener('keydown',e=>{if(document.getElementById('pg-deck').classList.contains('on')){if(e.key==='ArrowRight'||e.key==='ArrowDown')gSlide(1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')gSlide(-1);}});
+buildDots();
+</script>
+</body>
+</html>
