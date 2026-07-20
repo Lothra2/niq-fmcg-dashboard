@@ -1,0 +1,56 @@
+name: RR Generate Test Asset
+
+on:
+  push:
+    branches:
+      - rr-image-generation-links
+    paths:
+      - .github/workflows/rr-generate-test.yml
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: rr-image-generation-links
+      - name: Generate one independent GPT Image asset
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p generated
+          python3 - <<'PY'
+          import urllib.parse
+          prompt = '''ONE SINGLE CHARACTER ONLY. Full-body head-to-toe portrait of Mei Rook, fictional APAC Chief Merchant, confident woman in her early 40s, shoulder-length black wavy hair, navy tailored business suit over pale blue shirt, arms crossed, premium HD pixel art for a neo-noir detective game, intentional crisp square pixels, 32-bit era detail, clean silhouette, consistent anatomy, generous transparent margin around hair hands and shoes. Transparent background. No office, no props except subtle wristwatch. No text, letters, logo, border, card, UI, collage, grid, split screen, other people, duplicated body, cropped head, cropped feet, painting, watercolor, 3D render, photograph.'''
+          url = 'https://gen.pollinations.ai/image/' + urllib.parse.quote(prompt, safe='') + '?model=gptimage&width=1024&height=1536&quality=hd&transparent=true&enhance=false&safe=true&nologo=true'
+          open('generated/url.txt','w').write(url)
+          PY
+          URL="$(cat generated/url.txt)"
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt"
+            if curl -L --fail --retry 3 --retry-delay 10 --max-time 900 "$URL" -o generated/mei-rook.png; then
+              break
+            fi
+            sleep 20
+          done
+          test -s generated/mei-rook.png
+          file generated/mei-rook.png
+          python3 - <<'PY'
+          from PIL import Image
+          p='generated/mei-rook.png'
+          im=Image.open(p)
+          print(im.format, im.size, im.mode)
+          assert im.width >= 768 and im.height >= 1024
+          PY
+      - name: Commit generated asset
+        shell: bash
+        run: |
+          git config user.name "retail-realms-asset-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add generated/mei-rook.png generated/url.txt
+          git commit -m "Generate independent Mei Rook test asset" || exit 0
+          git push origin HEAD:rr-image-generation-links
