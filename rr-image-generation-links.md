@@ -1,0 +1,3 @@
+# Temporary Retail Realms image generation links
+
+- [Mei Rook standalone](https://gen.pollinations.ai/image/single%20full-body%20female%20Chief%20Merchant%20character%2C%20one%20person%20only%2C%20head%20to%20toe%2C%20high-definition%20pixel%20art%2C%20neo-noir%20detective%20game%2C%20APAC%20professional%2C%20navy%20business%20suit%2C%20confident%20arms-crossed%20pose%2C%20clean%20plain%20dark%20background%2C%20generous%20safe%20margins%2C%20no%20text%2C%20no%20logo%2C%20no%20frame%2C%20no%20card%2C%20no%20collage%2C%20no%20other%20people?model=gptimage&width=1024&height=1536&seed=101&enhance=false&safe=true)
